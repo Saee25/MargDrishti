@@ -18,6 +18,7 @@ def main():
     # 1. Models
     safe_copy("experiments/custom_v5_margnet/best.pt", out_dir / "models/margnet.pt")
     safe_copy("experiments/resnet50_finetune/best.pt", out_dir / "models/resnet50.pt")
+    safe_copy("experiments/yolo_nano/weights/best.pt", out_dir / "models/yolo_nano.pt")
     
     # 2. JSONs
     safe_copy("data/processed/class_map.json", out_dir / "class_map.json")

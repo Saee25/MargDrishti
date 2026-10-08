@@ -252,3 +252,74 @@ async def predict_sample(
         true_class_slug=true_cls["slug"] if true_cls else None,
         true_class_display_name=true_cls["display_name"] if true_cls else None,
     )
+
+# ---------------------------------------------------------------------------
+# POST /detect
+# ---------------------------------------------------------------------------
+
+@router.post("/detect", summary="Detect objects in an uploaded image using YOLO")
+async def detect(
+    file: Annotated[UploadFile, File(description="Image file (JPEG, PNG, WebP, BMP; max 8 MB)")],
+):
+    """
+    Detect traffic signs in an image using YOLO Nano.
+    """
+    raw = await file.read()
+    if len(raw) > settings.MAX_UPLOAD_BYTES:
+        raise HTTPException(status_code=413, detail="File exceeds 8 MB limit")
+
+    ct = (file.content_type or "").lower()
+    if ct not in settings.ALLOWED_CONTENT_TYPES:
+        raise HTTPException(
+            status_code=400,
+            detail=f"Unsupported file type '{ct}'. Accepted: JPEG, PNG, WebP, BMP",
+        )
+
+    entry = model_registry.get_model("yolo")
+    if not entry.available:
+        raise HTTPException(status_code=503, detail="YOLO model unavailable")
+
+    try:
+        import io
+        import base64
+        from PIL import Image
+        img = Image.open(io.BytesIO(raw)).convert("RGB")
+    except Exception as exc:
+        raise HTTPException(status_code=400, detail="Invalid image")
+
+    loop = asyncio.get_event_loop()
+    
+    def _run_yolo():
+        import time
+        import numpy as np
+        t0 = time.perf_counter()
+        results = entry.model(img, verbose=False)
+        t1 = time.perf_counter()
+        res = results[0]
+        # plot returns BGR numpy array
+        img_bgr = res.plot()
+        img_rgb = img_bgr[..., ::-1]
+        out_img = Image.fromarray(img_rgb)
+        buf = io.BytesIO()
+        out_img.save(buf, format="JPEG")
+        b64 = base64.b64encode(buf.getvalue()).decode("ascii")
+        data_url = f"data:image/jpeg;base64,{b64}"
+        
+        detections = []
+        for box in res.boxes:
+            cls_id = int(box.cls[0].item())
+            conf = float(box.conf[0].item())
+            name = res.names[cls_id]
+            detections.append({"class": name, "confidence": conf})
+            
+        return {
+            "image_url": data_url,
+            "latency_ms": round((t1 - t0) * 1000, 2),
+            "detections": detections
+        }
+
+    async with entry.lock:
+        result = await loop.run_in_executor(None, _run_yolo)
+
+    return result
+

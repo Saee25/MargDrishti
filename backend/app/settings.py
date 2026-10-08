@@ -46,6 +46,7 @@ class Settings:
 
     MARGNET_PT: Path = MODELS_DIR / "margnet.pt"
     RESNET50_PT: Path = MODELS_DIR / "resnet50.pt"
+    YOLO_PT: Path = MODELS_DIR / "yolo_nano.pt"
 
     # --- inference limits ---
     MAX_UPLOAD_BYTES: int = 8 * 1024 * 1024  # 8 MB

@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-10-09T01:19:02.374661",
+  "generated_at": "2026-10-09T02:40:26.925176",
   "available_artifacts": [
     ".gitkeep",
     "ablation.json",
@@ -14,7 +14,8 @@
   ],
   "models": [
     "margnet.pt",
-    "resnet50.pt"
+    "resnet50.pt",
+    "yolo_nano.pt"
   ],
   "figures": [
     "accuracy_by_crop_size.png",

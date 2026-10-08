@@ -3,7 +3,7 @@ import { motion } from 'motion/react';
 import { toPng } from 'html-to-image';
 import { Download, Copy, Presentation, ArrowRight, ArrowLeft } from 'lucide-react';
 import { formatNumber, formatPercent, formatParams, formatSize, formatTime } from '../lib/format';
-import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer, ScatterChart, Scatter, ZAxis } from 'recharts';
+import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer, ScatterChart, Scatter, ZAxis, LineChart, Line, ComposedChart } from 'recharts';
 
 function ChartExportBtn({ chartRef, filename }) {
   const handleDownload = () => {
@@ -23,7 +23,7 @@ function ChartExportBtn({ chartRef, filename }) {
   return (
     <button 
       onClick={handleDownload}
-      className="absolute top-2 right-2 p-2 bg-white/80 hover:bg-white rounded-lg border border-lavender-200 text-ink-600 hover:text-purple-700 transition-colors shadow-sm"
+      className="absolute top-2 right-2 p-2 bg-white/80 hover:bg-white rounded-lg border border-lavender-200 text-ink-600 hover:text-purple-700 transition-colors shadow-sm z-10"
       title="Download PNG"
     >
       <Download size={16} />
@@ -33,6 +33,10 @@ function ChartExportBtn({ chartRef, filename }) {
 
 export default function Comparison() {
   const [data, setData] = useState(null);
+  const [historyMargnet, setHistoryMargnet] = useState([]);
+  const [historyResnet, setHistoryResnet] = useState([]);
+  const [ablationData, setAblationData] = useState([]);
+  
   const [presentationMode, setPresentationMode] = useState(false);
   const [currentSection, setCurrentSection] = useState(0);
   const [showFrozen, setShowFrozen] = useState(true);
@@ -58,6 +62,21 @@ export default function Comparison() {
     fetch('/api/metrics/summary')
       .then(res => res.json())
       .then(setData)
+      .catch(console.error);
+      
+    fetch('/api/metrics/margnet/history')
+      .then(res => res.json())
+      .then(d => setHistoryMargnet(d.history))
+      .catch(console.error);
+
+    fetch('/api/metrics/resnet50/history')
+      .then(res => res.json())
+      .then(d => setHistoryResnet(d.history))
+      .catch(console.error);
+      
+    fetch('/api/metrics/ablation')
+      .then(res => res.json())
+      .then(d => setAblationData(d.rows))
       .catch(console.error);
   }, []);
 
@@ -108,24 +127,31 @@ export default function Comparison() {
     );
   }
 
-  const margnet = data.models.find(m => m.name === 'MargNet') || {};
-  const resnetFine = data.models.find(m => m.name === 'ResNet50 fine-tuned') || {};
-  const resnetFrozen = data.models.find(m => m.name === 'ResNet50 frozen') || {};
+  const margnetRow = data.rows?.find(m => m.display_name === 'MargNet') || {};
+  const resnetFineRow = data.rows?.find(m => m.display_name === 'ResNet50 Fine-tuned') || {};
+  const resnetFrozenRow = data.rows?.find(m => m.display_name === 'ResNet50 Frozen') || {};
 
-  const accGap = ((resnetFine.metrics?.test_macro_f1 || 0) - (margnet.metrics?.test_macro_f1 || 0)) * 100;
-  const paramRatio = ((resnetFine.metrics?.parameters || 1) / (margnet.metrics?.parameters || 1)).toFixed(1);
-  const sizeRatio = ((resnetFine.metrics?.size_mb || 1) / (margnet.metrics?.size_mb || 1)).toFixed(1);
-  const speedRatio = ((resnetFine.metrics?.inference_time_cpu_ms || 1) / (margnet.metrics?.inference_time_cpu_ms || 1)).toFixed(1);
+  const accGap = ((resnetFineRow.macro_f1 || 0) - (margnetRow.macro_f1 || 0)) * 100;
+  const paramRatio = ((resnetFineRow.parameters || 1) / (margnetRow.parameters || 1)).toFixed(1);
+  const sizeRatio = ((resnetFineRow.size_mb || 1) / (margnetRow.size_mb || 1)).toFixed(1);
+  const speedRatio = ((resnetFineRow.cpu_latency_ms || 1) / (margnetRow.cpu_latency_ms || 1)).toFixed(1);
 
   const accChartData = [
-    { name: 'Accuracy', MargNet: margnet.metrics?.test_accuracy || 0, ResNet50: resnetFine.metrics?.test_accuracy || 0 },
-    { name: 'Top-3 Acc', MargNet: margnet.metrics?.test_top3_accuracy || 0, ResNet50: resnetFine.metrics?.test_top3_accuracy || 0 },
-    { name: 'Precision', MargNet: margnet.metrics?.test_macro_precision || 0, ResNet50: resnetFine.metrics?.test_macro_precision || 0 },
-    { name: 'Recall', MargNet: margnet.metrics?.test_macro_recall || 0, ResNet50: resnetFine.metrics?.test_macro_recall || 0 },
-    { name: 'Macro F1', MargNet: margnet.metrics?.test_macro_f1 || 0, ResNet50: resnetFine.metrics?.test_macro_f1 || 0 },
+    { name: 'Accuracy', MargNet: margnetRow.test_accuracy || 0, ResNet50: resnetFineRow.test_accuracy || 0 },
+    { name: 'Top-3 Acc', MargNet: margnetRow.top3_accuracy || 0, ResNet50: resnetFineRow.top3_accuracy || 0 },
+    { name: 'Macro F1', MargNet: margnetRow.macro_f1 || 0, ResNet50: resnetFineRow.macro_f1 || 0 },
   ].map(d => ({ ...d, MargNet: d.MargNet * 100, ResNet50: d.ResNet50 * 100 }));
+  
+  const effChartData = [
+    { name: 'Parameters (M)', MargNet: (margnetRow.parameters || 0) / 1e6, ResNet50: (resnetFineRow.parameters || 0) / 1e6 },
+    { name: 'Size (MB)', MargNet: margnetRow.size_mb || 0, ResNet50: resnetFineRow.size_mb || 0 },
+    { name: 'Latency (ms)', MargNet: margnetRow.cpu_latency_ms || 0, ResNet50: resnetFineRow.cpu_latency_ms || 0 },
+  ];
 
   const accChartRef = React.createRef();
+  const effChartRef = React.createRef();
+  const trainChartRef = React.createRef();
+  const ablChartRef = React.createRef();
 
   return (
     <div className={`flex gap-8 relative ${presentationMode ? 'text-xl' : ''}`}>
@@ -231,33 +257,33 @@ export default function Comparison() {
               <tbody className="divide-y divide-lavender-100">
                 <tr>
                   <td className="px-6 py-4 text-ink-600">Accuracy</td>
-                  <td className="px-6 py-4 font-mono">{formatPercent(margnet.metrics?.test_accuracy)}</td>
-                  {showFrozen && <td className="px-6 py-4 font-mono text-ink-400">{formatPercent(resnetFrozen.metrics?.test_accuracy)}</td>}
-                  <td className="px-6 py-4 font-mono bg-sage/10 text-sage-700 font-medium">{formatPercent(resnetFine.metrics?.test_accuracy)}</td>
+                  <td className="px-6 py-4 font-mono">{formatPercent(margnetRow.test_accuracy)}</td>
+                  {showFrozen && <td className="px-6 py-4 font-mono text-ink-400">{formatPercent(resnetFrozenRow.test_accuracy)}</td>}
+                  <td className="px-6 py-4 font-mono bg-sage/10 text-sage-700 font-medium">{formatPercent(resnetFineRow.test_accuracy)}</td>
                 </tr>
                 <tr>
                   <td className="px-6 py-4 text-ink-600">Macro F1</td>
-                  <td className="px-6 py-4 font-mono">{formatPercent(margnet.metrics?.test_macro_f1)}</td>
-                  {showFrozen && <td className="px-6 py-4 font-mono text-ink-400">{formatPercent(resnetFrozen.metrics?.test_macro_f1)}</td>}
-                  <td className="px-6 py-4 font-mono bg-sage/10 text-sage-700 font-medium">{formatPercent(resnetFine.metrics?.test_macro_f1)}</td>
+                  <td className="px-6 py-4 font-mono">{formatPercent(margnetRow.macro_f1)}</td>
+                  {showFrozen && <td className="px-6 py-4 font-mono text-ink-400">{formatPercent(resnetFrozenRow.macro_f1)}</td>}
+                  <td className="px-6 py-4 font-mono bg-sage/10 text-sage-700 font-medium">{formatPercent(resnetFineRow.macro_f1)}</td>
                 </tr>
                 <tr>
                   <td className="px-6 py-4 text-ink-600">Parameters</td>
-                  <td className="px-6 py-4 font-mono bg-sage/10 text-sage-700 font-medium">{formatParams(margnet.metrics?.parameters)}</td>
-                  {showFrozen && <td className="px-6 py-4 font-mono text-ink-400">{formatParams(resnetFrozen.metrics?.parameters)}</td>}
-                  <td className="px-6 py-4 font-mono">{formatParams(resnetFine.metrics?.parameters)}</td>
+                  <td className="px-6 py-4 font-mono bg-sage/10 text-sage-700 font-medium">{formatParams(margnetRow.parameters)}</td>
+                  {showFrozen && <td className="px-6 py-4 font-mono text-ink-400">{formatParams(resnetFrozenRow.parameters)}</td>}
+                  <td className="px-6 py-4 font-mono">{formatParams(resnetFineRow.parameters)}</td>
                 </tr>
                 <tr>
                   <td className="px-6 py-4 text-ink-600">Size</td>
-                  <td className="px-6 py-4 font-mono bg-sage/10 text-sage-700 font-medium">{formatSize(margnet.metrics?.size_mb)}</td>
-                  {showFrozen && <td className="px-6 py-4 font-mono text-ink-400">{formatSize(resnetFrozen.metrics?.size_mb)}</td>}
-                  <td className="px-6 py-4 font-mono">{formatSize(resnetFine.metrics?.size_mb)}</td>
+                  <td className="px-6 py-4 font-mono bg-sage/10 text-sage-700 font-medium">{formatSize(margnetRow.size_mb)}</td>
+                  {showFrozen && <td className="px-6 py-4 font-mono text-ink-400">{formatSize(resnetFrozenRow.size_mb)}</td>}
+                  <td className="px-6 py-4 font-mono">{formatSize(resnetFineRow.size_mb)}</td>
                 </tr>
                 <tr>
                   <td className="px-6 py-4 text-ink-600">CPU Latency</td>
-                  <td className="px-6 py-4 font-mono bg-sage/10 text-sage-700 font-medium">{formatTime(margnet.metrics?.inference_time_cpu_ms)}</td>
-                  {showFrozen && <td className="px-6 py-4 font-mono text-ink-400">{formatTime(resnetFrozen.metrics?.inference_time_cpu_ms)}</td>}
-                  <td className="px-6 py-4 font-mono">{formatTime(resnetFine.metrics?.inference_time_cpu_ms)}</td>
+                  <td className="px-6 py-4 font-mono bg-sage/10 text-sage-700 font-medium">{formatTime(margnetRow.cpu_latency_ms)}</td>
+                  {showFrozen && <td className="px-6 py-4 font-mono text-ink-400">{formatTime(resnetFrozenRow.cpu_latency_ms)}</td>}
+                  <td className="px-6 py-4 font-mono">{formatTime(resnetFineRow.cpu_latency_ms)}</td>
                 </tr>
               </tbody>
             </table>
@@ -286,20 +312,137 @@ export default function Comparison() {
           </div>
         </section>
 
-        {/* Placeholder for sections 4-11 for brevity, but let's add 12 Limitation */}
-        {/* Skipping straight to Limitations to keep it simple, but we can render empty boxes */}
+        {/* 4. Efficiency */}
+        <section ref={sectionRefs.current[3]} className="space-y-6 scroll-mt-24">
+          <div className="space-y-2">
+            <span className="text-sm font-medium text-purple-500 uppercase tracking-wider">4. Efficiency</span>
+            <h2 className="text-3xl font-serif text-ink-900">Size and Speed Tradeoffs</h2>
+          </div>
+          <div className="h-80 relative bg-white p-6 rounded-2xl border border-lavender-200" ref={effChartRef}>
+            <ChartExportBtn chartRef={effChartRef} filename="efficiency.png" />
+            <ResponsiveContainer width="100%" height="100%">
+              <BarChart data={effChartData} margin={{ top: 20, right: 30, left: 0, bottom: 5 }} layout="vertical">
+                <CartesianGrid strokeDasharray="3 3" horizontal={false} stroke="#EEEDFB" />
+                <XAxis type="number" axisLine={false} tickLine={false} />
+                <YAxis type="category" dataKey="name" axisLine={false} tickLine={false} width={120} />
+                <Tooltip contentStyle={{ borderRadius: '8px', border: 'none', boxShadow: '0 4px 6px -1px rgb(0 0 0 / 0.1)' }} />
+                <Legend iconType="circle" />
+                <Bar dataKey="MargNet" fill="#7C5FA6" radius={[0, 4, 4, 0]} maxBarSize={30} />
+                <Bar dataKey="ResNet50" fill="#C39A45" radius={[0, 4, 4, 0]} maxBarSize={30} />
+              </BarChart>
+            </ResponsiveContainer>
+          </div>
+        </section>
+        
+        {/* 5. Training Behaviour */}
+        <section ref={sectionRefs.current[4]} className="space-y-6 scroll-mt-24">
+          <div className="space-y-2">
+            <span className="text-sm font-medium text-purple-500 uppercase tracking-wider">5. Training Behaviour</span>
+            <h2 className="text-3xl font-serif text-ink-900">Convergence over Epochs</h2>
+          </div>
+          <div className="h-96 relative bg-white p-6 rounded-2xl border border-lavender-200" ref={trainChartRef}>
+            <ChartExportBtn chartRef={trainChartRef} filename="training_behaviour.png" />
+            <ResponsiveContainer width="100%" height="100%">
+              <LineChart margin={{ top: 20, right: 30, left: 0, bottom: 5 }}>
+                <CartesianGrid strokeDasharray="3 3" vertical={false} stroke="#EEEDFB" />
+                <XAxis dataKey="epoch" axisLine={false} tickLine={false} type="number" domain={['dataMin', 'dataMax']} allowDuplicatedCategory={false} />
+                <YAxis yAxisId="left" domain={[0, 'auto']} axisLine={false} tickLine={false} label={{ value: 'Loss', angle: -90, position: 'insideLeft' }} />
+                <YAxis yAxisId="right" orientation="right" domain={[0, 1]} axisLine={false} tickLine={false} tickFormatter={(v) => `${(v*100).toFixed(0)}%`} label={{ value: 'Accuracy', angle: 90, position: 'insideRight' }} />
+                <Tooltip contentStyle={{ borderRadius: '8px', border: 'none', boxShadow: '0 4px 6px -1px rgb(0 0 0 / 0.1)' }} />
+                <Legend iconType="circle" />
+                {historyMargnet && <Line yAxisId="left" type="monotone" data={historyMargnet} dataKey="val_loss" name="MargNet Val Loss" stroke="#7C5FA6" strokeWidth={2} dot={false} />}
+                {historyResnet && <Line yAxisId="left" type="monotone" data={historyResnet} dataKey="val_loss" name="ResNet50 Val Loss" stroke="#C39A45" strokeWidth={2} dot={false} />}
+                {historyMargnet && <Line yAxisId="right" type="monotone" data={historyMargnet} dataKey="val_acc" name="MargNet Val Acc" stroke="#A995C9" strokeWidth={2} strokeDasharray="5 5" dot={false} />}
+                {historyResnet && <Line yAxisId="right" type="monotone" data={historyResnet} dataKey="val_acc" name="ResNet50 Val Acc" stroke="#D8BD7C" strokeWidth={2} strokeDasharray="5 5" dot={false} />}
+              </LineChart>
+            </ResponsiveContainer>
+          </div>
+        </section>
 
-        {sections.slice(3, 11).map((s, idx) => (
-           <section key={s.id} ref={sectionRefs.current[idx+3]} className="space-y-6 scroll-mt-24">
-             <div className="space-y-2">
-                <span className="text-sm font-medium text-purple-500 uppercase tracking-wider">{idx + 4}. {s.title}</span>
-                <h2 className="text-3xl font-serif text-ink-900">Data viz placeholder</h2>
-             </div>
-             <div className="h-64 bg-white/50 border border-lavender-200 border-dashed rounded-2xl flex items-center justify-center text-ink-400">
-               Chart / Viz for {s.title} (Requires API data)
-             </div>
-           </section>
-        ))}
+        {/* 6. Mistakes */}
+        <section ref={sectionRefs.current[5]} className="space-y-6 scroll-mt-24">
+          <div className="space-y-2">
+            <span className="text-sm font-medium text-purple-500 uppercase tracking-wider">6. Mistakes</span>
+            <h2 className="text-3xl font-serif text-ink-900">Where Models Go Wrong</h2>
+          </div>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div className="bg-white rounded-2xl border border-lavender-200 overflow-hidden">
+                <div className="px-4 py-2 bg-lavender-50 border-b border-lavender-200 text-sm font-medium">MargNet Misclassifications</div>
+                <img src="/static/figures/margnet_misclassified_grid.png" alt="MargNet Mistakes" className="w-full h-auto object-cover p-2" />
+            </div>
+            <div className="bg-white rounded-2xl border border-lavender-200 overflow-hidden">
+                <div className="px-4 py-2 bg-lavender-50 border-b border-lavender-200 text-sm font-medium">ResNet50 Misclassifications</div>
+                <img src="/static/figures/resnet50_misclassified_grid.png" alt="ResNet50 Mistakes" className="w-full h-auto object-cover p-2" />
+            </div>
+          </div>
+        </section>
+
+        {/* 7. Class by Class */}
+        <section ref={sectionRefs.current[6]} className="space-y-6 scroll-mt-24">
+          <div className="space-y-2">
+            <span className="text-sm font-medium text-purple-500 uppercase tracking-wider">7. Class by Class</span>
+            <h2 className="text-3xl font-serif text-ink-900">Per-Class F1 Score Difference</h2>
+          </div>
+          <div className="bg-white rounded-2xl border border-lavender-200 overflow-hidden">
+             <img src="/static/figures/per_class_f1_difference.png" alt="Per Class Difference" className="w-full h-auto" />
+          </div>
+        </section>
+
+        {/* 8. Confusion Matrix */}
+        <section ref={sectionRefs.current[7]} className="space-y-6 scroll-mt-24">
+          <div className="space-y-2">
+            <span className="text-sm font-medium text-purple-500 uppercase tracking-wider">8. Confusion Matrix</span>
+            <h2 className="text-3xl font-serif text-ink-900">Side-by-Side Comparison</h2>
+          </div>
+          <div className="bg-white rounded-2xl border border-lavender-200 overflow-hidden p-2">
+             <img src="/static/figures/confusion_side_by_side.png" alt="Confusion Matrix Comparison" className="w-full h-auto" />
+          </div>
+        </section>
+
+        {/* 9. Robustness */}
+        <section ref={sectionRefs.current[8]} className="space-y-6 scroll-mt-24">
+          <div className="space-y-2">
+            <span className="text-sm font-medium text-purple-500 uppercase tracking-wider">9. Robustness</span>
+            <h2 className="text-3xl font-serif text-ink-900">Accuracy by Crop Size</h2>
+          </div>
+          <div className="bg-white rounded-2xl border border-lavender-200 overflow-hidden p-2">
+             <img src="/static/figures/accuracy_by_crop_size.png" alt="Accuracy by Crop Size" className="w-full h-auto max-w-2xl mx-auto" />
+          </div>
+        </section>
+
+        {/* 10. Grad-CAM */}
+        <section ref={sectionRefs.current[9]} className="space-y-6 scroll-mt-24">
+          <div className="space-y-2">
+            <span className="text-sm font-medium text-purple-500 uppercase tracking-wider">10. Grad-CAM</span>
+            <h2 className="text-3xl font-serif text-ink-900">Visualizing Attention</h2>
+          </div>
+          <div className="bg-white rounded-2xl border border-lavender-200 overflow-hidden p-2">
+             <img src="/static/figures/gradcam_comparison.png" alt="Grad-CAM Analysis" className="w-full h-auto" />
+          </div>
+        </section>
+
+        {/* 11. Ablation Recap */}
+        <section ref={sectionRefs.current[10]} className="space-y-6 scroll-mt-24">
+          <div className="space-y-2">
+            <span className="text-sm font-medium text-purple-500 uppercase tracking-wider">11. Ablation Recap</span>
+            <h2 className="text-3xl font-serif text-ink-900">Ablation Study (MargNet Evolution)</h2>
+          </div>
+          <div className="h-80 relative bg-white p-6 rounded-2xl border border-lavender-200" ref={ablChartRef}>
+            <ChartExportBtn chartRef={ablChartRef} filename="ablation_study.png" />
+            <ResponsiveContainer width="100%" height="100%">
+              <ComposedChart data={ablationData} margin={{ top: 20, right: 30, left: 0, bottom: 5 }}>
+                <CartesianGrid strokeDasharray="3 3" vertical={false} stroke="#EEEDFB" />
+                <XAxis dataKey="step" axisLine={false} tickLine={false} />
+                <YAxis yAxisId="left" domain={[60, 100]} axisLine={false} tickLine={false} tickFormatter={(val) => `${val}%`} />
+                <YAxis yAxisId="right" orientation="right" axisLine={false} tickLine={false} tickFormatter={(val) => formatParams(val)} />
+                <Tooltip contentStyle={{ borderRadius: '8px', border: 'none', boxShadow: '0 4px 6px -1px rgb(0 0 0 / 0.1)' }} />
+                <Legend iconType="circle" />
+                <Bar yAxisId="left" dataKey="test_acc" name="Test Accuracy (%)" fill="#7C5FA6" radius={[4, 4, 0, 0]} maxBarSize={40} />
+                <Line yAxisId="right" type="monotone" dataKey="parameters" name="Parameters" stroke="#C39A45" strokeWidth={3} dot={{ r: 4 }} />
+              </ComposedChart>
+            </ResponsiveContainer>
+          </div>
+        </section>
 
         {/* 12. Limitations */}
         <section ref={sectionRefs.current[11]} className="space-y-6 scroll-mt-24">

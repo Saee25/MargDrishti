@@ -126,6 +126,25 @@ def _warm_up(model: torch.nn.Module, img_size: int, device: torch.device) -> Non
     with torch.inference_mode():
         model(dummy)
 
+def _load_yolo(key: str, pt_path: Path) -> LoadedModel:
+    entry = LoadedModel(key=key)
+    if not pt_path.exists():
+        entry.error = f"Checkpoint not found: {pt_path}"
+        logger.warning("Model %s unavailable: %s", key, entry.error)
+        return entry
+    
+    try:
+        from ultralytics import YOLO
+        model = YOLO(str(pt_path))
+        entry.model = model
+        entry.available = True
+        logger.info("Model %s loaded successfully", key)
+    except Exception as exc:
+        entry.error = str(exc)
+        logger.exception("Failed to load model %s: %s", key, exc)
+    
+    return entry
+
 
 def load_all_models() -> None:
     """
@@ -144,4 +163,8 @@ def load_all_models() -> None:
         key="resnet50",
         pt_path=settings.RESNET50_PT,
         device=device,
+    )
+    _registry["yolo"] = _load_yolo(
+        key="yolo",
+        pt_path=settings.YOLO_PT,
     )

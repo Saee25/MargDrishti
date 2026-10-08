@@ -67,8 +67,9 @@
 ## Slide 18: Conclusion
 - Custom CNN achieves NOT AVAILABLE accuracy vs ResNet 0.9832.
 
-## Slide 19: Future work
-- YOLO for object detection, lighter pretrained models.
+## Slide 19: Future work & Extras
+- Implemented YOLO object detection as a bonus for full image detection.
+- Consider lighter pretrained models.
 
 ## Slide 20: Viva questions
 - Why no flips? Directional signs.

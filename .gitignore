@@ -34,3 +34,8 @@ experiments/_smoke*/
 colab_results/
 *.log
 generate_frontend*.py
+
+# Additional ignores
+runs/
+out.txt
+margdrishti_results_*/

@@ -1,7 +1,7 @@
 import React, { useState, useRef } from 'react';
 import { Upload, AlertCircle, RefreshCw } from 'lucide-react';
 import { Section, Card, Container, Button, Skeleton } from '../components/ui';
-import { predict } from '../lib/api';
+import { predict, detectYolo } from '../lib/api';
 
 export default function LiveDemo() {
   const [modelType, setModelType] = useState('both');
@@ -21,7 +21,10 @@ export default function LiveDemo() {
     setLoading(true);
 
     try {
-      if (modelType === 'both') {
+      if (modelType === 'yolo') {
+        const yoloRes = await detectYolo(selectedFile);
+        setResults({ yolo: yoloRes });
+      } else if (modelType === 'both') {
         const [margnet, resnet] = await Promise.all([
           predict('margnet-v5', selectedFile).catch(e => ({ error: e.message })),
           predict('resnet50-finetuned', selectedFile).catch(e => ({ error: e.message }))
@@ -46,7 +49,7 @@ export default function LiveDemo() {
           <div className="lg:col-span-4 flex flex-col gap-6">
             <Card className="p-6">
               <div className="flex bg-lavender-100 p-1 rounded-lg mb-6 w-full">
-                {[{id: 'both', label: 'Both'}, {id: 'margnet-v5', label: 'MargNet'}, {id: 'resnet50-finetuned', label: 'ResNet50'}].map(m => (
+                {[{id: 'both', label: 'Both'}, {id: 'margnet-v5', label: 'MargNet'}, {id: 'resnet50-finetuned', label: 'ResNet50'}, {id: 'yolo', label: 'YOLO (Full Image)'}].map(m => (
                   <button
                     key={m.id}
                     onClick={() => setModelType(m.id)}
@@ -74,7 +77,7 @@ export default function LiveDemo() {
                   onChange={e => handleFile(e.target.files[0])}
                 />
               </div>
-              <p className="text-xs text-ink-400 mt-4 text-center">Note: The models expect a tightly cropped traffic sign, not a full road image.</p>
+              <p className="text-xs text-ink-400 mt-4 text-center">Note: Classification models expect a tightly cropped traffic sign. YOLO expects a full road image.</p>
             </Card>
           </div>
 
@@ -121,9 +124,9 @@ export default function LiveDemo() {
                         <p className="text-xs text-rose">{results.margnet.error}</p>
                       ) : (
                         <div>
-                          <p className="text-2xl font-display mb-1">{results.margnet.prediction}</p>
-                          <p className="text-sm text-ink-600 mb-4 font-mono">{(results.margnet.confidence * 100).toFixed(1)}% confidence</p>
-                          <p className="text-xs text-ink-400 font-mono mt-4 pt-4 border-t border-lavender-100">Latency: {results.margnet.latency_ms?.toFixed(1)}ms</p>
+                          <p className="text-2xl font-display mb-1">{results.margnet.results?.[0]?.top_k?.[0]?.display_name || 'Unknown'}</p>
+                          <p className="text-sm text-ink-600 mb-4 font-mono">{(results.margnet.results?.[0]?.top_k?.[0]?.probability * 100 || 0).toFixed(1)}% confidence</p>
+                          <p className="text-xs text-ink-400 font-mono mt-4 pt-4 border-t border-lavender-100">Latency: {results.margnet.results?.[0]?.total_ms?.toFixed(1)}ms</p>
                         </div>
                       )}
                     </div>
@@ -136,9 +139,32 @@ export default function LiveDemo() {
                         <p className="text-xs text-rose">{results.resnet.error}</p>
                       ) : (
                         <div>
-                          <p className="text-2xl font-display mb-1">{results.resnet.prediction}</p>
-                          <p className="text-sm text-ink-600 mb-4 font-mono">{(results.resnet.confidence * 100).toFixed(1)}% confidence</p>
-                          <p className="text-xs text-ink-400 font-mono mt-4 pt-4 border-t border-lavender-100">Latency: {results.resnet.latency_ms?.toFixed(1)}ms</p>
+                          <p className="text-2xl font-display mb-1">{results.resnet.results?.[0]?.top_k?.[0]?.display_name || 'Unknown'}</p>
+                          <p className="text-sm text-ink-600 mb-4 font-mono">{(results.resnet.results?.[0]?.top_k?.[0]?.probability * 100 || 0).toFixed(1)}% confidence</p>
+                          <p className="text-xs text-ink-400 font-mono mt-4 pt-4 border-t border-lavender-100">Latency: {results.resnet.results?.[0]?.total_ms?.toFixed(1)}ms</p>
+                        </div>
+                      )}
+                    </div>
+                  )}
+
+                  {results.yolo && (
+                    <div className="bg-white p-5 rounded-xl border border-lavender-200 shadow-sm border-t-4 border-t-sage md:col-span-2">
+                      <h4 className="font-semibold text-sage mb-4 text-sm uppercase tracking-wider">YOLO Nano Detection</h4>
+                      {results.yolo.error ? (
+                        <p className="text-xs text-rose">{results.yolo.error}</p>
+                      ) : (
+                        <div className="flex flex-col md:flex-row gap-6">
+                          <img src={results.yolo.image_url} alt="YOLO Detections" className="max-w-full h-auto rounded-lg shadow-sm border border-lavender-100" />
+                          <div>
+                            <p className="text-sm font-semibold mb-2">Detections ({results.yolo.detections.length}):</p>
+                            <ul className="text-sm text-ink-600 space-y-1 mb-4 font-mono">
+                              {results.yolo.detections.map((d, i) => (
+                                <li key={i}>{d.class} ({(d.confidence * 100).toFixed(1)}%)</li>
+                              ))}
+                              {results.yolo.detections.length === 0 && <li>No signs detected</li>}
+                            </ul>
+                            <p className="text-xs text-ink-400 font-mono mt-4 pt-4 border-t border-lavender-100">Latency: {results.yolo.latency_ms?.toFixed(1)}ms</p>
+                          </div>
                         </div>
                       )}
                     </div>

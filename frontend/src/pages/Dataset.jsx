@@ -12,24 +12,47 @@ export default function Dataset() {
   const [searchTerm, setSearchTerm] = useState('');
   const [splitView, setSplitView] = useState('train');
 
+  const filteredClassStats = useMemo(() => {
+    if (!stats) return [];
+    const base_class_stats = Object.entries(stats.class_counts_train || {}).map(([name, count]) => ({
+      name,
+      train: count,
+      valid: 0,
+      test: 0
+    }));
+    return base_class_stats
+      .filter(c => c.name.toLowerCase().includes(searchTerm.toLowerCase()))
+      .sort((a, b) => b[splitView] - a[splitView])
+      .map(c => ({ name: c.name, count: c[splitView] }));
+  }, [stats, searchTerm, splitView]);
+
   if (loading || !stats) {
     return <Container className="py-12"><Skeleton className="h-96" /></Container>;
   }
 
-  const { stats: s, class_stats, dropped_classes } = stats;
+  const class_counts_vals = Object.values(stats.class_counts_train || {});
+  const s = {
+    train_crops: stats.splits?.train || class_counts_vals.reduce((a, b) => a + b, 0),
+    valid_crops: stats.splits?.valid || 0,
+    test_crops: stats.splits?.test || 0,
+    total_images: stats.total_images || 'N/A',
+    total_crops: stats.total_crops || class_counts_vals.reduce((a, b) => a + b, 0),
+    num_classes: stats.k || 0,
+    dropped_classes: (stats.dropped_classes || []).length,
+    max_class_crops: class_counts_vals.length > 0 ? Math.max(...class_counts_vals) : 0,
+    min_class_crops: class_counts_vals.length > 0 ? Math.min(...class_counts_vals) : 0
+  };
+
+  const dropped_classes = (stats.dropped_classes || []).map(d => ({
+    name: typeof d === 'string' ? d : (d.class || d.name),
+    count: typeof d === 'string' ? 'N/A' : (d.total || d.count || 'N/A')
+  }));
 
   const splitData = [
     { name: 'Train', count: s.train_crops },
     { name: 'Validation', count: s.valid_crops },
     { name: 'Test', count: s.test_crops }
   ];
-
-  const filteredClassStats = useMemo(() => {
-    return (class_stats || [])
-      .filter(c => c.name.toLowerCase().includes(searchTerm.toLowerCase()))
-      .sort((a, b) => b[splitView] - a[splitView])
-      .map(c => ({ name: c.name, count: c[splitView] }));
-  }, [class_stats, searchTerm, splitView]);
 
   return (
     <div className="flex flex-col gap-12">

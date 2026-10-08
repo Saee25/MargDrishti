@@ -46,6 +46,12 @@ Google Colab is a free, web-based Python environment that provides access to pow
    - Run the new ResNet50 cells at the bottom of the notebook. Note: The first run will download the ResNet50 weights from torchvision (about 100 MB).
    - Once finished, the final cell will download `margdrishti_results_resnet.zip` to your laptop. Save it in the project root.
 
+10. **Third Colab Trip (YOLO Detection - Bonus)**
+    - Run `python -m scripts.pack_for_colab --detection` locally to rebuild `margdrishti_colab.zip` with the YOLO dataset format.
+    - Re-upload `margdrishti_colab.zip` and the updated `notebooks/colab_training.ipynb` to Google Drive/Colab.
+    - Run the new YOLO training cells.
+    - Once finished, the final cell will download `margdrishti_results_yolo.zip` to your laptop. Save it in the project root.
+
 ## Fairness Note
 *The training time measured on Colab is on a cloud GPU and is not directly comparable to training time on your laptop's CPU. Always record the device per run and show it next to the training time in reports. Inference speed (how fast the model predicts) will be measured separately on your laptop, ensuring that comparison stays fair.*
 

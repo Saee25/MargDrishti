@@ -1,10 +1,20 @@
+import argparse
 import os
 import zipfile
 from pathlib import Path
 
 def main():
+    parser = argparse.ArgumentParser(description="Pack files for Colab")
+    parser.add_argument("--detection", action="store_true", help="Include YOLO detection data")
+    args = parser.parse_args()
+
     zip_name = "margdrishti_colab.zip"
-    includes = ["ml", "scripts", "configs", "requirements.txt", "data/processed", "experiments/custom_v5_margnet", "experiments/resnet50_frozen", "experiments/resnet50_finetune"]
+    includes = ["ml", "scripts", "configs", "requirements.txt"]
+    
+    if args.detection:
+        includes.append("data/processed/yolo")
+    else:
+        includes.extend(["data/processed", "experiments/custom_v5_margnet", "experiments/resnet50_frozen", "experiments/resnet50_finetune"])
     
     with zipfile.ZipFile(zip_name, 'w', zipfile.ZIP_DEFLATED) as zipf:
         for include in includes:

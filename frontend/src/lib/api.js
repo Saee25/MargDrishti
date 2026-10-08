@@ -43,7 +43,17 @@ export const getSamples = (limit = 12) => fetchWithTimeout(`/api/samples?limit=$
 export const predict = (modelId, imageFile) => {
   const formData = new FormData();
   formData.append('file', imageFile);
-  return fetchWithTimeout(`/api/predict/${modelId}`, {
+  formData.append('model', modelId === 'margnet-v5' ? 'margnet' : (modelId === 'resnet50-finetuned' ? 'resnet50' : 'both'));
+  return fetchWithTimeout(`/api/predict`, {
+    method: 'POST',
+    body: formData
+  });
+};
+
+export const detectYolo = (imageFile) => {
+  const formData = new FormData();
+  formData.append('file', imageFile);
+  return fetchWithTimeout(`/api/detect`, {
     method: 'POST',
     body: formData
   });
