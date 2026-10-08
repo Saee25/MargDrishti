@@ -23,3 +23,11 @@ Thumbs.db
 tests/_tmp*/
 experiments/_smoke*/
 *_extracted/
+
+# Added to ignore benchmark runs and temporary logs
+*.log
+colab_results/
+experiments/*
+!experiments/.gitkeep
+reports/*
+!reports/.gitkeep

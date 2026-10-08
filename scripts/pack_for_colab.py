@@ -4,7 +4,7 @@ from pathlib import Path
 
 def main():
     zip_name = "margdrishti_colab.zip"
-    includes = ["ml", "scripts", "configs", "requirements.txt", "data/processed"]
+    includes = ["ml", "scripts", "configs", "requirements.txt", "data/processed", "experiments/custom_v5_margnet", "experiments/resnet50_frozen", "experiments/resnet50_finetune"]
     
     with zipfile.ZipFile(zip_name, 'w', zipfile.ZIP_DEFLATED) as zipf:
         for include in includes:
