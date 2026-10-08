@@ -25,6 +25,8 @@ class Config(dict):
         self.__setitem__(key, value)
 
     def __setitem__(self, key, value):
+        if isinstance(value, dict) and not isinstance(value, Config):
+            value = Config(value)
         super(Config, self).__setitem__(key, value)
         self.__dict__.update({key: value})
 
