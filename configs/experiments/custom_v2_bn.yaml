@@ -1,0 +1,9 @@
+# variant v2, augment false, class_weights false, label_smoothing 0, dropout 0.5
+description: "variant v2, augment false, class_weights false, label_smoothing 0, dropout 0.5"
+model:
+  variant: "v2"
+  dropout: 0.5
+train:
+  augment: false
+  class_weights: false
+  label_smoothing: 0.0

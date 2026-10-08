@@ -1,0 +1,44 @@
+[
+  {
+    "name": "ConvBlock 1",
+    "type": "Sequential",
+    "output_shape": "(32, 32, 32)",
+    "parameter_count": 896,
+    "description": "Extracts basic features like edges and colors."
+  },
+  {
+    "name": "ConvBlock 2",
+    "type": "Sequential",
+    "output_shape": "(64, 16, 16)",
+    "parameter_count": 18496,
+    "description": "Combines basic features into simpler shapes and textures."
+  },
+  {
+    "name": "ConvBlock 3",
+    "type": "Sequential",
+    "output_shape": "(128, 8, 8)",
+    "parameter_count": 73856,
+    "description": "Builds complex patterns representing traffic sign parts."
+  },
+  {
+    "name": "Flatten",
+    "type": "Flatten",
+    "output_shape": "(8192,)",
+    "parameter_count": 0,
+    "description": "Transforms the 3D feature maps into a 1D vector."
+  },
+  {
+    "name": "Dense 1",
+    "type": "Linear + ReLU + Dropout",
+    "output_shape": "(256,)",
+    "parameter_count": 2097408,
+    "description": "Learns high-level combinations of features, discarding some to prevent memorisation."
+  },
+  {
+    "name": "Dense 2",
+    "type": "Linear",
+    "output_shape": "(75,)",
+    "parameter_count": 19275,
+    "description": "Outputs the final classification scores for each traffic sign class."
+  }
+]

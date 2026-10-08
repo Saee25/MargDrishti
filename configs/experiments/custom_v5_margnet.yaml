@@ -1,0 +1,9 @@
+# variant v5, augment true, class_weights true, label_smoothing 0.1, dropout 0.4
+description: "variant v5, augment true, class_weights true, label_smoothing 0.1, dropout 0.4"
+model:
+  variant: "v5"
+  dropout: 0.4
+train:
+  augment: true
+  class_weights: true
+  label_smoothing: 0.1

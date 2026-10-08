@@ -1,0 +1,44 @@
+[
+  {
+    "name": "ConvBlock 1",
+    "type": "Sequential",
+    "output_shape": "(32, 32, 32)",
+    "parameter_count": 10208,
+    "description": "Extracts primary visual elements like lines, edges and basic colours."
+  },
+  {
+    "name": "ConvBlock 2",
+    "type": "Sequential",
+    "output_shape": "(64, 16, 16)",
+    "parameter_count": 55552,
+    "description": "Detects intermediate shapes such as circles, triangles and corners."
+  },
+  {
+    "name": "ConvBlock 3",
+    "type": "Sequential",
+    "output_shape": "(128, 8, 8)",
+    "parameter_count": 221696,
+    "description": "Identifies complex symbols and patterns specific to traffic signs."
+  },
+  {
+    "name": "ConvBlock 4",
+    "type": "Sequential",
+    "output_shape": "(256, 4, 4)",
+    "parameter_count": 885760,
+    "description": "Captures highly abstract, deep semantic features of the entire sign."
+  },
+  {
+    "name": "Global Average Pooling",
+    "type": "AdaptiveAvgPool2d + Flatten",
+    "output_shape": "(256,)",
+    "parameter_count": 0,
+    "description": "Summarises each feature map into a single number, greatly reducing parameters and preventing overfitting."
+  },
+  {
+    "name": "Dense",
+    "type": "Dropout + Linear",
+    "output_shape": "(75,)",
+    "parameter_count": 19275,
+    "description": "Computes the final probabilities for each traffic sign class."
+  }
+]
