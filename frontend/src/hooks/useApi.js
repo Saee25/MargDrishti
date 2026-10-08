@@ -3,7 +3,8 @@ import { useState, useEffect, useCallback } from 'react';
 const cache = new Map();
 
 export function useApi(apiFunc, ...args) {
-  const cacheKey = apiFunc.name + JSON.stringify(args);
+  const argsStr = JSON.stringify(args);
+  const cacheKey = apiFunc.name + argsStr;
   
   const [data, setData] = useState(cache.get(cacheKey) || null);
   const [loading, setLoading] = useState(!cache.has(cacheKey));
@@ -19,7 +20,8 @@ export function useApi(apiFunc, ...args) {
     setLoading(true);
     setError(null);
     try {
-      const result = await apiFunc(...args);
+      const parsedArgs = JSON.parse(argsStr);
+      const result = await apiFunc(...parsedArgs);
       cache.set(cacheKey, result);
       setData(result);
     } catch (err) {
@@ -27,7 +29,7 @@ export function useApi(apiFunc, ...args) {
     } finally {
       setLoading(false);
     }
-  }, [cacheKey, apiFunc, args]);
+  }, [cacheKey, apiFunc, argsStr]);
 
   useEffect(() => {
     fetch();

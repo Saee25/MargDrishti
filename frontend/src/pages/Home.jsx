@@ -7,7 +7,7 @@ import { useApi } from '../hooks/useApi';
 import { getMetricsSummary, getDatasetStats, getSamples } from '../lib/api';
 import { Link } from 'react-router-dom';
 
-function HeroSamples({ samples, loading }) {
+function HeroSamples({ samplesData, loading }) {
   if (loading) {
     return (
       <div className="grid grid-cols-3 gap-2 p-4 md:p-8 relative h-64 md:h-full">
@@ -18,7 +18,8 @@ function HeroSamples({ samples, loading }) {
     );
   }
 
-  if (!samples || samples.length === 0) return null;
+  const samples = samplesData?.samples || [];
+  if (samples.length === 0) return null;
 
   return (
     <div className="relative w-full h-64 md:h-96">
@@ -45,7 +46,7 @@ function HeroSamples({ samples, loading }) {
               ${i === 8 ? 'rounded-br-3xl' : ''}
             `}
           >
-            <img src={sample.url} alt={`Traffic sign ${sample.class_id}`} className="w-full h-full object-cover" />
+            <img src={sample.image_url} alt={`Traffic sign ${sample.true_class_index || sample.id}`} className="w-full h-full object-cover" />
           </motion.div>
         ))}
       </motion.div>
@@ -124,7 +125,7 @@ export default function Home() {
           </div>
         </Reveal>
         <Reveal delay={0.2} className="relative w-full">
-          <HeroSamples samples={samples} loading={samplesLoading} />
+          <HeroSamples samplesData={samples} loading={samplesLoading} />
         </Reveal>
       </section>
 
