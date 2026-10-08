@@ -210,7 +210,7 @@ class PerClassResponse(BaseModel):
 
 class ComparisonResponse(BaseModel):
     available: bool
-    data: Optional[dict[str, Any]] = None
+    data: Optional[Any] = None
 
 
 class AblationRow(BaseModel):

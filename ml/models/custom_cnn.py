@@ -14,7 +14,7 @@ class ConvBlock(nn.Module):
             layers.append(nn.Conv2d(in_c, out_ch, kernel_size=3, padding=1, bias=bias))
             if use_bn:
                 layers.append(nn.BatchNorm2d(out_ch))
-            layers.append(nn.ReLU(inplace=True))
+            layers.append(nn.ReLU(inplace=False))
         
         layers.append(nn.MaxPool2d(2))
         self.block = nn.Sequential(*layers)
@@ -33,7 +33,7 @@ class PlainCNN(nn.Module):
         self.classifier = nn.Sequential(
             nn.Flatten(),
             nn.Linear(128 * 8 * 8, 256),
-            nn.ReLU(inplace=True),
+            nn.ReLU(inplace=False),
             nn.Dropout(dropout),
             nn.Linear(256, num_classes)
         )

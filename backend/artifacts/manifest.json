@@ -1,12 +1,14 @@
 {
-  "generated_at": "2026-10-09T00:08:55.364871",
+  "generated_at": "2026-10-09T01:19:02.374661",
   "available_artifacts": [
     ".gitkeep",
     "ablation.json",
     "benchmark.json",
     "class_map.json",
+    "comparison.json",
     "custom_v5_layers.json",
     "dataset_stats.json",
+    "manifest.json",
     "metrics.json",
     "resnet50_default_layers.json"
   ],
@@ -15,11 +17,17 @@
     "resnet50.pt"
   ],
   "figures": [
+    "accuracy_by_crop_size.png",
+    "confusion_side_by_side.png",
+    "efficiency_bars.png",
+    "f1_vs_train_count.png",
+    "gradcam_comparison.png",
     "margnet_confusion_matrix.png",
     "margnet_correct_grid.png",
     "margnet_curves.png",
     "margnet_misclassified_grid.png",
     "margnet_per_class_f1.png",
+    "per_class_f1_difference.png",
     "resnet50_confusion_matrix.png",
     "resnet50_correct_grid.png",
     "resnet50_curves.png",

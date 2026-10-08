@@ -59,12 +59,12 @@ def generate_comparison(is_smoke=False):
     rft_pred = load_predictions(f"experiments/{prefix}resnet50_finetune/predictions.csv")
     
     # Assert sets are identical
-    assert all(marg_pred['crop_path'] == rft_pred['crop_path'])
+    assert all(marg_pred['path'] == rft_pred['path'])
     
-    y_true = marg_pred['true_class'].values
-    y_p_marg = marg_pred['pred_class'].values
-    y_p_rft = rft_pred['pred_class'].values
-    y_p_rf = rf_pred['pred_class'].values
+    y_true = marg_pred['true_idx'].values
+    y_p_marg = marg_pred['pred_idx'].values
+    y_p_rft = rft_pred['pred_idx'].values
+    y_p_rf = rf_pred['pred_idx'].values
     
     # Headline Table
     def get_row(name, sum_data, bench_model_name, is_pretrain, epochs_run, best_epoch):
@@ -128,10 +128,10 @@ def generate_comparison(is_smoke=False):
     # Per-class analysis
     with open("data/processed/class_map.json", 'r') as f:
         class_map = json.load(f)
-    rev_class_map = {int(v): k for k, v in class_map.items()}
+    rev_class_map = {int(c['index']): c['slug'] for c in class_map}
     
     manifest = pd.read_csv("data/processed/manifest.csv")
-    train_counts = manifest[manifest['split'] == 'train']['class_id'].value_counts().to_dict()
+    train_counts = manifest[manifest['split'] == 'train']['class_index'].value_counts().to_dict()
     
     from sklearn.metrics import classification_report
     cr_marg = classification_report(y_true, y_p_marg, output_dict=True, zero_division=0)
@@ -181,10 +181,13 @@ def generate_comparison(is_smoke=False):
     
     # Crop size analysis
     def get_shorter_side(path):
+        # Fix paths that were absolute on Google Colab
+        if "/content/MargDrishti/" in path:
+            path = path.replace("/content/MargDrishti/", "")
         with Image.open(path) as img:
             return min(img.size)
             
-    test_crops = marg_pred['crop_path'].tolist()
+    test_crops = marg_pred['path'].tolist()
     shorter_sides = np.array([get_shorter_side(p) for p in test_crops])
     crop_size_acc = group_by_crop_size(y_true, y_p_marg, y_p_rft, shorter_sides)
     
@@ -271,6 +274,8 @@ def generate_comparison(is_smoke=False):
     
     for i, idx in enumerate(selected_indices):
         path = test_crops[idx]
+        if "/content/MargDrishti/" in path:
+            path = path.replace("/content/MargDrishti/", "")
         img = Image.open(path).convert('RGB')
         
         hm_m = cam_m.generate(t_m(img).unsqueeze(0), y_true[idx])

@@ -5,7 +5,24 @@ A data science lab project comparing a custom CNN built from scratch against a p
 ## Research Question
 How close can a small custom CNN get to a fine-tuned ResNet50 on Indian traffic signs, and at what fraction of the parameters, model size, and inference time?
 
-## Folder Structure
+## Results Table
+<!-- RESULTS_START -->
+| Model               | Input Size   | Pretrained   |   Parameters |   Trainable Params |   Size (MB) |   MACs (M) |   Epochs Run |   Best Epoch |   Training Time | Device   |   Test Accuracy |   Top-3 Accuracy |   Macro Precision |   Macro Recall |   Macro F1 |   Weighted F1 |   CPU Latency (ms) |   CPU Img/sec |   Times Fewer Params |   Times Smaller |   Times Faster (Latency) |   Acc Gap (pp) |
+|:--------------------|:-------------|:-------------|-------------:|-------------------:|------------:|-----------:|-------------:|-------------:|----------------:|:---------|----------------:|-----------------:|------------------:|---------------:|-----------:|--------------:|-------------------:|--------------:|---------------------:|----------------:|-------------------------:|---------------:|
+| MargNet             | 64x64        | No           |      1191463 |            1191463 |      4.5693 |   211.1752 |           40 |           35 |          0.0000 | cuda     |          0.0000 |           0.0000 |            0.0000 |         0.0000 |     0.0000 |        0.0000 |             7.7630 |      360.3658 |              19.8525 |         19.8142 |                  10.0809 |         0.0000 |
+| ResNet50 frozen     | 224x224      | Yes          |     23653511 |           23653511 |     90.5366 |  4087.2817 |           20 |            6 |          0.0000 | cuda     |          0.0000 |           0.0000 |            0.0000 |         0.0000 |     0.0000 |        0.0000 |            81.1984 |       13.7597 |               1.0000 |          1.0000 |                   0.9638 |         0.0000 |
+| ResNet50 fine-tuned | 224x224      | Yes          |     23653511 |           23653511 |     90.5366 |  4087.2817 |           20 |            5 |          0.0000 | cuda     |          0.0000 |           0.0000 |            0.0000 |         0.0000 |     0.0000 |        0.0000 |            78.2577 |       13.5161 |               1.0000 |          1.0000 |                   1.0000 |         0.0000 |
+<!-- RESULTS_END -->
+
+## Screenshots
+![Demo Screenshot 1](reports/figures/placeholder1.png)
+![Demo Screenshot 2](reports/figures/placeholder2.png)
+
+## Dataset Download and Placement
+Download the "Indian Traffic SignBoards" dataset from Roboflow Universe (version 3 Final - Correct Label, COCO JSON export).
+Extract the dataset so that the split folders and annotation files are placed directly under `data/raw/`.
+
+## Folder Map
 - `configs/`: YAML configuration files.
 - `data/`: Dataset splits (raw, processed, and web demo samples).
 - `ml/`: Python package containing data pipelines, model definitions, and training logic.
@@ -17,11 +34,7 @@ How close can a small custom CNN get to a fine-tuned ResNet50 on Indian traffic 
 - `notebooks/`: Google Colab notebooks for remote GPU training.
 - `tests/`: Unit tests for the codebase.
 
-## Dataset
-Download the "Indian Traffic SignBoards" dataset from Roboflow Universe (version 3 Final - Correct Label, COCO JSON export).
-Extract the dataset so that the split folders and annotation files are placed directly under `data/raw/`.
-
-## Setup
+## Full Setup (Empty Machine)
 ### Windows
 1. Open PowerShell in the project root.
 2. Create and activate the virtual environment:
@@ -41,50 +54,51 @@ Extract the dataset so that the split folders and annotation files are placed di
    ```powershell
    pip install roboflow
    ```
+6. Setup Node.js frontend:
+   ```powershell
+   cd frontend
+   npm install
+   cd ..
+   ```
 
-## Workflow
-### 1. Data Preparation
-- `python -m scripts.build_crops`
-- `python -m scripts.compute_stats`
-- `python -m scripts.preview_data`
+## Workflow and Commands
+1. Check Environment (1 min)
+   `python -m scripts.check_env`
+2. Prepare Data (1-2 mins)
+   `python -m scripts.build_crops`
+   `python -m scripts.compute_stats`
+   `python -m scripts.preview_data`
+3. Optional: Time Probe
+   `python -m scripts.time_probe --config configs/experiments/custom_v5_margnet.yaml`
+4. Pack for Colab (1 min)
+   `python -m scripts.pack_for_colab`
+5. Train on Google Colab (~1 hour)
+   See `notebooks/COLAB_GUIDE.md` for full instructions.
+6. Import Results (1 min)
+   `python -m scripts.import_run --zip margdrishti_results_custom.zip`
+7. Run all reports (1 min)
+   `python -m scripts.run_all_reports`
+8. Start App
+   Windows: `.\start.ps1`
+   Unix: `./start.sh`
 
-### 2. Time Probe
-- Run a quick time probe to estimate training duration:
-  `python -m scripts.time_probe --config configs/experiments/custom_v5_margnet.yaml`
+## Fairness Rules
+- Same crop extraction, padding, and splits.
+- Same random seed (42).
+- Same evaluation metrics and test set.
 
-### 3. Pack for Colab
-- Bundle files for cloud training:
-  `python -m scripts.pack_for_colab`
+## Limitations
+- Imbalanced classes (many classes have very few samples).
+- Small overall dataset size limiting generalisation.
+- No real-time object detection yet.
 
-### 4. Train on Google Colab
-- See `notebooks/COLAB_GUIDE.md` for full instructions.
-- Upload `margdrishti_colab.zip` and `notebooks/colab_training.ipynb` to Google Drive.
-- Run the notebook in Colab with a T4 GPU.
-- Download `margdrishti_results_custom.zip` when finished.
+## Troubleshooting
+- **CUDA not found**: Use Google Colab for GPU training.
+- **DataLoader workers on Windows**: Ensure `if __name__ == '__main__':` guards are used.
+- **Port already in use**: Close existing servers or change ports in `start.ps1` / `main.py`.
+- **Missing artifacts**: Rerun `python -m scripts.run_all_reports`.
+- **Slow CPU training**: Reduce epochs or patience.
+- **Colab disconnects**: Run cells incrementally, save checkpoints frequently.
 
-### 5. Import Results and Generate Ablation Report
-- Import the downloaded results into your local workspace:
-  `python -m scripts.import_run --zip margdrishti_results_custom.zip`
-- Generate the ablation report:
-  `python -m scripts.ablation_report`
-
-## Run the Backend
-
-The backend must be started from the **project root** directory.
-
-```powershell
-# From the MargDrishti/ project root, with the virtual environment active:
-uvicorn backend.app.main:app --reload --port 8000
-```
-
-- The API will be available at **http://127.0.0.1:8000**
-- Interactive docs (Swagger UI) are at **http://127.0.0.1:8000/docs**
-- ReDoc is at **http://127.0.0.1:8000/redoc**
-
-On the first startup the server loads both model checkpoints from
-`backend/artifacts/models/`.  MargNet loads in about 1 s; ResNet50 takes
-about 10–15 s.  Once you see `Models loaded. Ready to serve requests.` in the
-terminal the API is accepting requests.
-
-> **Tip:** Open `/docs` and try `POST /api/predict` with an image from
-> `data/samples/` to see a live prediction with Grad-CAM overlay.
+## Licence and Dataset Credit
+- Dataset: Indian Traffic SignBoards from Roboflow Universe (by MAJOR PROJECT). MIT Licence.
