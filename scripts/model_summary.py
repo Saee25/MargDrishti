@@ -133,11 +133,25 @@ def main():
     margnet_total, _ = count_parameters(margnet)
     resnet_total, _ = count_parameters(resnet)
     
+    # Trainable in each stage
+    # For MargNet, everything is trainable
+    margnet_trainable = margnet_total
+    
+    # For ResNet50 Frozen, only the head is trainable
+    resnet.freeze_backbone()
+    _, resnet_trainable_frozen = count_parameters(resnet)
+    
+    # For ResNet50 Fine-tuned, everything is trainable
+    resnet.unfreeze_all()
+    _, resnet_trainable_finetuned = count_parameters(resnet)
+    
     def count_convs(m):
         return sum(1 for module in m.modules() if isinstance(module, torch.nn.Conv2d))
         
     comp = [
         {"Metric": "Total Parameters", "MargNet": f"{margnet_total:,}", "ResNet50": f"{resnet_total:,}"},
+        {"Metric": "Trainable Params (Frozen/Stage 1)", "MargNet": f"{margnet_trainable:,}", "ResNet50": f"{resnet_trainable_frozen:,}"},
+        {"Metric": "Trainable Params (Finetune/Stage 2)", "MargNet": f"{margnet_trainable:,}", "ResNet50": f"{resnet_trainable_finetuned:,}"},
         {"Metric": "Size in MB", "MargNet": f"{model_size_mb(margnet):.2f}", "ResNet50": f"{model_size_mb(resnet):.2f}"},
         {"Metric": "Conv Layers", "MargNet": count_convs(margnet), "ResNet50": count_convs(resnet)}
     ]

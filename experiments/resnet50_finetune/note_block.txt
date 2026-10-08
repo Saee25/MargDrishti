@@ -1,0 +1,25 @@
+===== NOTE THIS FOR PPT =====
+Run Name       : resnet50_finetune
+Model & Variant: resnet50 default
+Description    : 
+Parameters     : 23,653,511
+Model Size     : 90.23 MB
+Epochs Run     : 9 (Best: 5)
+Total Time     : 5.5 mins
+Device         : cuda
+
+--- Validation ---
+Accuracy : 0.9858
+Macro F1 : 0.9834
+
+--- Test ---
+Accuracy : 0.9832
+Top-3 Acc: 0.9964
+Macro P  : 0.9799
+Macro R  : 0.9805
+Macro F1 : 0.9786
+Weight F1: 0.9832
+
+Worst F1 Classes: steep_descent (0.80), length_limit (0.83), bullock_cart_and_hand_cart_prohibited (0.86)
+Most Confused   : bullock_cart_and_hand_cart_prohibited->pedestrian_prohibited (2), all_motor_vehicle_prohibited->truck_prohibited (1), compulsary_sound_horn->horn_prohibited (1)
+===== END NOTE =====

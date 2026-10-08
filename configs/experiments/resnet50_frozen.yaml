@@ -1,0 +1,26 @@
+# The loss recipe and the augmentation family are identical to custom_v5_margnet.
+# It is what makes the comparison fair.
+data:
+  img_size: 224
+  norm_mean: [0.485, 0.456, 0.406] # ImageNet stats
+  norm_std: [0.229, 0.224, 0.225]
+  batch_size: 32
+  augment: true
+  num_workers: 4      # Speed option: increase if CPU has many cores
+  cache_in_ram: false # Speed option: set to true if you have >16GB RAM
+
+model:
+  name: resnet50
+  variant: "frozen"
+  dropout: 0.3
+
+train:
+  epochs: 6
+  early_stopping_patience: 3
+  lr_head: 0.001
+  weight_decay: 0.0001
+  class_weights: true
+  label_smoothing: 0.1
+  freeze_backbone: true
+  amp: auto             # Speed option: auto or true for mixed precision on CUDA
+  channels_last: true   # Speed option: true for memory_format optimizations on CUDA

@@ -1,0 +1,46 @@
+data:
+  cache_in_ram: true
+  crop_padding: 0.1
+  max_crop_side: 256
+  min_box_side: 20
+  min_crops_per_class: 40
+  normalisation: imagenet
+  num_workers: 2
+model:
+  dropout: 0.3
+  img_size: 224
+  name: resnet50
+  variant: default
+paths:
+  artifacts_dir: /content/MargDrishti/backend/artifacts
+  crops_dir: /content/MargDrishti/data/processed/crops
+  experiments_dir: /content/drive/MyDrive/MargDrishti_Colab/experiments
+  processed_dir: /content/MargDrishti/data/processed
+  raw_dir: /content/MargDrishti/data/raw
+  reports_dir: /content/MargDrishti/reports
+  samples_dir: /content/MargDrishti/data/samples
+project:
+  name: MargDrishti
+  seed: 42
+smoke:
+  epochs: 2
+  max_per_class: 8
+train:
+  amp: auto
+  augment: true
+  batch_size: 32
+  channels_last: true
+  class_weights: true
+  early_stopping_patience: 3
+  epochs: 6
+  freeze_backbone: true
+  grad_clip: 5.0
+  label_smoothing: 0.1
+  lr: 0.001
+  lr_head: 0.001
+  min_lr: 1.0e-05
+  monitor: val_macro_f1
+  optimizer: adamw
+  scheduler: cosine
+  warmup_epochs: 3
+  weight_decay: 0.0001

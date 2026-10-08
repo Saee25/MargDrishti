@@ -1,0 +1,49 @@
+Downloading: "https://download.pytorch.org/models/resnet50-11ad3fa6.pth" to /root/.cache/torch/hub/checkpoints/resnet50-11ad3fa6.pth
+============================================================
+RUN NAME:      resnet50_frozen
+MODEL:         resnet50 (Variant: default)
+PARAMETERS:    23,653,511
+DEVICE:        cuda
+CLASSES (K):   71
+DATA SPLITS:   Train: 2932 | Val: 422 | Test: 835
+------------------------------------------------------------
+EPOCHS:        6
+BATCH SIZE:    32
+LEARNING RATE: 0.001
+============================================================
+Froze model backbone parameters.
+Training started on cuda
+Epoch 001/006 | Train Loss: 4.2730 Acc: 0.0211 | Val Loss: 4.2441 Acc: 0.0261 MacroF1: 0.0118 | LR: 1.00e-05 | Time: 31.7s
+Epoch 002/006 | Train Loss: 3.8717 Acc: 0.1784 | Val Loss: 3.5828 Acc: 0.3981 MacroF1: 0.3567 | LR: 3.40e-04 | Time: 28.2s
+Epoch 003/006 | Train Loss: 3.1333 Acc: 0.4465 | Val Loss: 2.9358 Acc: 0.4526 MacroF1: 0.4192 | LR: 6.70e-04 | Time: 26.7s
+Epoch 004/006 | Train Loss: 2.5545 Acc: 0.5597 | Val Loss: 2.5124 Acc: 0.5142 MacroF1: 0.4933 | LR: 1.00e-03 | Time: 26.3s
+Epoch 005/006 | Train Loss: 2.2257 Acc: 0.6456 | Val Loss: 2.3324 Acc: 0.5616 MacroF1: 0.5493 | LR: 7.50e-04 | Time: 25.2s
+Epoch 006/006 | Train Loss: 2.0764 Acc: 0.6879 | Val Loss: 2.2890 Acc: 0.5924 MacroF1: 0.5705 | LR: 2.50e-04 | Time: 24.9s
+Training finished. Evaluating on validation split...
+Evaluating on test split...
+
+===== NOTE THIS FOR PPT =====
+Run Name       : resnet50_frozen
+Model & Variant: resnet50 default
+Description    : 
+Parameters     : 23,653,511
+Model Size     : 90.23 MB
+Epochs Run     : 6 (Best: 6)
+Total Time     : 2.8 mins
+Device         : cuda
+
+--- Validation ---
+Accuracy : 0.5924
+Macro F1 : 0.5705
+
+--- Test ---
+Accuracy : 0.5880
+Top-3 Acc: 0.8000
+Macro P  : 0.6421
+Macro R  : 0.5961
+Macro F1 : 0.5750
+Weight F1: 0.5844
+
+Worst F1 Classes: u_turn_prohibited (0.11), side_road_right (0.15), roundabout (0.17)
+Most Confused   : speed_limit_30->speed_limit_50 (12), left_turn_prohibited->horn_prohibited (8), falling_rocks->unguarded_level_crossing (6)
+===== END NOTE =====

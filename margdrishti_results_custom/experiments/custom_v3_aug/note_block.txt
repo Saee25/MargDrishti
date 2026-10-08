@@ -1,0 +1,25 @@
+===== NOTE THIS FOR PPT =====
+Run Name       : custom_v3_aug
+Model & Variant: custom v3
+Description    : variant v3, augment true, class_weights false, label_smoothing 0, dropout 0.5
+Parameters     : 2,209,127
+Model Size     : 8.43 MB
+Epochs Run     : 9 (Best: 1)
+Total Time     : 0.9 mins
+Device         : cuda
+
+--- Validation ---
+Accuracy : 0.0190
+Macro F1 : 0.0050
+
+--- Test ---
+Accuracy : 0.0156
+Top-3 Acc: 0.0431
+Macro P  : 0.0056
+Macro R  : 0.0172
+Macro F1 : 0.0076
+Weight F1: 0.0080
+
+Worst F1 Classes: all_motor_vehicle_prohibited (0.00), axle_load_limit (0.00), bullock_cart_and_hand_cart_prohibited (0.00)
+Most Confused   : restriction_ends->unguarded_level_crossing (15), pass_either_side->unguarded_level_crossing (10), compulsary_turn_left_ahead->unguarded_level_crossing (8)
+===== END NOTE =====

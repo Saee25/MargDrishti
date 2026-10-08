@@ -1,0 +1,25 @@
+===== NOTE THIS FOR PPT =====
+Run Name       : custom_v2_bn
+Model & Variant: custom v2
+Description    : variant v2, augment false, class_weights false, label_smoothing 0, dropout 0.5
+Parameters     : 2,209,127
+Model Size     : 8.43 MB
+Epochs Run     : 10 (Best: 2)
+Total Time     : 0.4 mins
+Device         : cuda
+
+--- Validation ---
+Accuracy : 0.0474
+Macro F1 : 0.0277
+
+--- Test ---
+Accuracy : 0.0395
+Top-3 Acc: 0.0850
+Macro P  : 0.0223
+Macro R  : 0.0379
+Macro F1 : 0.0221
+Weight F1: 0.0217
+
+Worst F1 Classes: all_motor_vehicle_prohibited (0.00), axle_load_limit (0.00), bullock_cart_and_hand_cart_prohibited (0.00)
+Most Confused   : left_turn_prohibited->stop (16), school_ahead->stop (16), speed_limit_30->stop (15)
+===== END NOTE =====

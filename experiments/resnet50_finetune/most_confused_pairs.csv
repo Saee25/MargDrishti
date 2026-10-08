@@ -1,0 +1,14 @@
+true_class,predicted_class,count,share
+bullock_cart_and_hand_cart_prohibited,pedestrian_prohibited,2,0.25
+all_motor_vehicle_prohibited,truck_prohibited,1,0.058823529411764705
+compulsary_sound_horn,horn_prohibited,1,0.07692307692307693
+left_reverse_bend,left_hand_curve,1,0.08333333333333333
+length_limit,width_limit,1,0.16666666666666666
+no_parking,horn_prohibited,1,0.06666666666666667
+quay_side_or_river_bank,unguarded_level_crossing,1,0.058823529411764705
+side_road_right,staggered_intersection,1,0.09090909090909091
+speed_limit_30,speed_limit_120,1,0.05
+steep_descent,men_at_work,1,0.16666666666666666
+steep_descent,unguarded_level_crossing,1,0.16666666666666666
+traffic_signal,speed_limit_80,1,0.06666666666666667
+truck_prohibited,length_limit,1,0.08333333333333333

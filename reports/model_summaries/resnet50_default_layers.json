@@ -1,0 +1,51 @@
+[
+  {
+    "name": "Stem",
+    "type": "Conv2d + BatchNorm + ReLU + MaxPool",
+    "output_shape": "(64, 56, 56)",
+    "parameter_count": 9536,
+    "description": "Extracts basic initial features from the 224x224 input image."
+  },
+  {
+    "name": "Layer 1 (3 blocks)",
+    "type": "Residual Blocks",
+    "output_shape": "(256, 56, 56)",
+    "parameter_count": 215808,
+    "description": "First set of residual blocks. A residual (skip) connection adds the block's input to its output, which prevents the vanishing gradient problem and lets very deep networks train effectively."
+  },
+  {
+    "name": "Layer 2 (4 blocks)",
+    "type": "Residual Blocks",
+    "output_shape": "(512, 28, 28)",
+    "parameter_count": 1219584,
+    "description": "Downsamples the spatial dimensions while doubling the number of feature channels."
+  },
+  {
+    "name": "Layer 3 (6 blocks)",
+    "type": "Residual Blocks",
+    "output_shape": "(1024, 14, 14)",
+    "parameter_count": 7098368,
+    "description": "The deepest feature extraction stage that captures complex structural parts of the traffic sign."
+  },
+  {
+    "name": "Layer 4 (3 blocks)",
+    "type": "Residual Blocks",
+    "output_shape": "(2048, 7, 7)",
+    "parameter_count": 14964736,
+    "description": "Produces the final high-level semantic feature maps."
+  },
+  {
+    "name": "Global Average Pooling",
+    "type": "AdaptiveAvgPool2d",
+    "output_shape": "(2048, 1, 1)",
+    "parameter_count": 0,
+    "description": "Averages each 7x7 feature map into a single value, summarising the whole image."
+  },
+  {
+    "name": "Head",
+    "type": "Dropout + Linear",
+    "output_shape": "(75,)",
+    "parameter_count": 153675,
+    "description": "Our custom classification head that maps the 2048 features to the final traffic sign classes."
+  }
+]

@@ -1,0 +1,54 @@
+============================================================
+RUN NAME:      custom_v2_bn
+MODEL:         custom (Variant: v2)
+PARAMETERS:    2,209,127
+DEVICE:        cuda
+CLASSES (K):   71
+DATA SPLITS:   Train: 2932 | Val: 422 | Test: 835
+------------------------------------------------------------
+EPOCHS:        40
+BATCH SIZE:    64
+LEARNING RATE: 0.001
+============================================================
+Training started on cuda
+Epoch 001/040 | Train Loss: 43.5506 Acc: 0.0126 | Val Loss: 21.6683 Acc: 0.0142 MacroF1: 0.0134 | LR: 1.00e-05 | Time: 6.1s
+Epoch 002/040 | Train Loss: 8.1419 Acc: 0.0307 | Val Loss: 4.1615 Acc: 0.0498 MacroF1: 0.0285 | LR: 3.40e-04 | Time: 2.4s
+Epoch 003/040 | Train Loss: 4.2439 Acc: 0.0225 | Val Loss: 4.2422 Acc: 0.0047 MacroF1: 0.0042 | LR: 6.70e-04 | Time: 1.7s
+Epoch 004/040 | Train Loss: 4.2583 Acc: 0.0215 | Val Loss: 4.2974 Acc: 0.0118 MacroF1: 0.0034 | LR: 1.00e-03 | Time: 1.4s
+Epoch 005/040 | Train Loss: 4.2629 Acc: 0.0198 | Val Loss: 4.2382 Acc: 0.0095 MacroF1: 0.0051 | LR: 9.98e-04 | Time: 1.3s
+Epoch 006/040 | Train Loss: 4.2245 Acc: 0.0246 | Val Loss: 4.2208 Acc: 0.0190 MacroF1: 0.0029 | LR: 9.93e-04 | Time: 1.2s
+Epoch 007/040 | Train Loss: 4.2255 Acc: 0.0205 | Val Loss: 4.2287 Acc: 0.0237 MacroF1: 0.0101 | LR: 9.84e-04 | Time: 1.3s
+Epoch 008/040 | Train Loss: 4.2101 Acc: 0.0249 | Val Loss: 4.2127 Acc: 0.0190 MacroF1: 0.0029 | LR: 9.71e-04 | Time: 1.4s
+Epoch 009/040 | Train Loss: 4.2108 Acc: 0.0256 | Val Loss: 4.2102 Acc: 0.0190 MacroF1: 0.0029 | LR: 9.56e-04 | Time: 2.0s
+Epoch 010/040 | Train Loss: 4.2139 Acc: 0.0198 | Val Loss: 4.2009 Acc: 0.0237 MacroF1: 0.0142 | LR: 9.37e-04 | Time: 1.8s
+Early stopping triggered after 10 epochs.
+Training finished. Evaluating on validation split...
+Evaluating on test split...
+
+===== NOTE THIS FOR PPT =====
+Run Name       : custom_v2_bn
+Model & Variant: custom v2
+Description    : variant v2, augment false, class_weights false, label_smoothing 0, dropout 0.5
+Parameters     : 2,209,127
+Model Size     : 8.43 MB
+Epochs Run     : 10 (Best: 2)
+Total Time     : 0.4 mins
+Device         : cuda
+
+--- Validation ---
+Accuracy : 0.0474
+Macro F1 : 0.0277
+
+--- Test ---
+Accuracy : 0.0395
+Top-3 Acc: 0.0850
+Macro P  : 0.0223
+Macro R  : 0.0379
+Macro F1 : 0.0221
+Weight F1: 0.0217
+
+Worst F1 Classes: all_motor_vehicle_prohibited (0.00), axle_load_limit (0.00), bullock_cart_and_hand_cart_prohibited (0.00)
+Most Confused   : left_turn_prohibited->stop (16), school_ahead->stop (16), speed_limit_30->stop (15)
+===== END NOTE =====
+
+WARNING: Test accuracy (0.0395) is below 5x chance level (0.0704). This suggests a bug.

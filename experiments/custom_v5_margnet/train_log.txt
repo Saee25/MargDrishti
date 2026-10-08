@@ -1,0 +1,81 @@
+============================================================
+RUN NAME:      custom_v5_margnet
+MODEL:         custom (Variant: v5)
+PARAMETERS:    1,191,463
+DEVICE:        cuda
+CLASSES (K):   71
+DATA SPLITS:   Train: 2932 | Val: 422 | Test: 835
+------------------------------------------------------------
+EPOCHS:        40
+BATCH SIZE:    64
+LEARNING RATE: 0.001
+============================================================
+Training started on cuda
+Epoch 001/040 | Train Loss: 8.3502 Acc: 0.0164 | Val Loss: 5.7632 Acc: 0.0071 MacroF1: 0.0025 | LR: 1.00e-05 | Time: 9.7s
+Epoch 002/040 | Train Loss: 5.6625 Acc: 0.0321 | Val Loss: 4.0904 Acc: 0.0711 MacroF1: 0.0519 | LR: 3.40e-04 | Time: 6.2s
+Epoch 003/040 | Train Loss: 4.5828 Acc: 0.0385 | Val Loss: 4.5227 Acc: 0.0664 MacroF1: 0.0311 | LR: 6.70e-04 | Time: 5.3s
+Epoch 004/040 | Train Loss: 4.2957 Acc: 0.0624 | Val Loss: 4.5893 Acc: 0.1256 MacroF1: 0.0684 | LR: 1.00e-03 | Time: 6.6s
+Epoch 005/040 | Train Loss: 4.0377 Acc: 0.0870 | Val Loss: 3.6466 Acc: 0.1445 MacroF1: 0.1014 | LR: 9.98e-04 | Time: 4.5s
+Epoch 006/040 | Train Loss: 3.7948 Acc: 0.1108 | Val Loss: 3.5872 Acc: 0.1351 MacroF1: 0.1147 | LR: 9.93e-04 | Time: 4.9s
+Epoch 007/040 | Train Loss: 3.5660 Acc: 0.1269 | Val Loss: 3.2574 Acc: 0.2180 MacroF1: 0.1578 | LR: 9.84e-04 | Time: 5.9s
+Epoch 008/040 | Train Loss: 3.3044 Acc: 0.1852 | Val Loss: 3.0433 Acc: 0.2796 MacroF1: 0.2695 | LR: 9.71e-04 | Time: 4.2s
+Epoch 009/040 | Train Loss: 3.1141 Acc: 0.2323 | Val Loss: 2.8219 Acc: 0.3128 MacroF1: 0.2820 | LR: 9.56e-04 | Time: 4.7s
+Epoch 010/040 | Train Loss: 2.9047 Acc: 0.2858 | Val Loss: 2.7645 Acc: 0.3318 MacroF1: 0.2847 | LR: 9.37e-04 | Time: 5.8s
+Epoch 011/040 | Train Loss: 2.7580 Acc: 0.3377 | Val Loss: 2.4666 Acc: 0.4668 MacroF1: 0.4354 | LR: 9.14e-04 | Time: 4.3s
+Epoch 012/040 | Train Loss: 2.5651 Acc: 0.3980 | Val Loss: 2.5346 Acc: 0.4123 MacroF1: 0.3539 | LR: 8.89e-04 | Time: 4.9s
+Epoch 013/040 | Train Loss: 2.3464 Acc: 0.4816 | Val Loss: 2.3055 Acc: 0.5379 MacroF1: 0.4945 | LR: 8.61e-04 | Time: 6.3s
+Epoch 014/040 | Train Loss: 2.2191 Acc: 0.5300 | Val Loss: 1.9080 Acc: 0.6801 MacroF1: 0.6594 | LR: 8.30e-04 | Time: 4.4s
+Epoch 015/040 | Train Loss: 2.0081 Acc: 0.6173 | Val Loss: 1.7704 Acc: 0.6967 MacroF1: 0.6790 | LR: 7.97e-04 | Time: 5.2s
+Epoch 016/040 | Train Loss: 1.8292 Acc: 0.6828 | Val Loss: 1.8556 Acc: 0.7109 MacroF1: 0.6938 | LR: 7.62e-04 | Time: 5.3s
+Epoch 017/040 | Train Loss: 1.7296 Acc: 0.7251 | Val Loss: 1.5731 Acc: 0.7915 MacroF1: 0.7650 | LR: 7.25e-04 | Time: 4.3s
+Epoch 018/040 | Train Loss: 1.6428 Acc: 0.7544 | Val Loss: 1.5438 Acc: 0.7891 MacroF1: 0.7725 | LR: 6.86e-04 | Time: 5.3s
+Epoch 019/040 | Train Loss: 1.5213 Acc: 0.8090 | Val Loss: 1.3869 Acc: 0.8720 MacroF1: 0.8471 | LR: 6.46e-04 | Time: 5.4s
+Epoch 020/040 | Train Loss: 1.4608 Acc: 0.8278 | Val Loss: 1.3966 Acc: 0.8412 MacroF1: 0.8362 | LR: 6.05e-04 | Time: 4.3s
+Epoch 021/040 | Train Loss: 1.3956 Acc: 0.8595 | Val Loss: 1.2953 Acc: 0.8720 MacroF1: 0.8529 | LR: 5.64e-04 | Time: 5.4s
+Epoch 022/040 | Train Loss: 1.3456 Acc: 0.8779 | Val Loss: 1.1927 Acc: 0.9242 MacroF1: 0.9161 | LR: 5.21e-04 | Time: 5.3s
+Epoch 023/040 | Train Loss: 1.2927 Acc: 0.8994 | Val Loss: 1.1605 Acc: 0.9100 MacroF1: 0.8872 | LR: 4.79e-04 | Time: 4.8s
+Epoch 024/040 | Train Loss: 1.2497 Acc: 0.9065 | Val Loss: 1.1468 Acc: 0.9171 MacroF1: 0.8912 | LR: 4.36e-04 | Time: 5.9s
+Epoch 025/040 | Train Loss: 1.2369 Acc: 0.9144 | Val Loss: 1.1820 Acc: 0.9218 MacroF1: 0.9023 | LR: 3.95e-04 | Time: 5.0s
+Epoch 026/040 | Train Loss: 1.2248 Acc: 0.9181 | Val Loss: 1.1213 Acc: 0.9431 MacroF1: 0.9269 | LR: 3.54e-04 | Time: 4.3s
+Epoch 027/040 | Train Loss: 1.1872 Acc: 0.9335 | Val Loss: 1.0765 Acc: 0.9360 MacroF1: 0.9113 | LR: 3.14e-04 | Time: 5.4s
+Epoch 028/040 | Train Loss: 1.1706 Acc: 0.9366 | Val Loss: 1.0848 Acc: 0.9431 MacroF1: 0.9267 | LR: 2.75e-04 | Time: 5.8s
+Epoch 029/040 | Train Loss: 1.1570 Acc: 0.9465 | Val Loss: 1.0521 Acc: 0.9550 MacroF1: 0.9239 | LR: 2.38e-04 | Time: 4.6s
+Epoch 030/040 | Train Loss: 1.1396 Acc: 0.9437 | Val Loss: 1.0510 Acc: 0.9479 MacroF1: 0.9158 | LR: 2.03e-04 | Time: 6.0s
+Epoch 031/040 | Train Loss: 1.1306 Acc: 0.9505 | Val Loss: 1.0582 Acc: 0.9526 MacroF1: 0.9388 | LR: 1.70e-04 | Time: 4.5s
+Epoch 032/040 | Train Loss: 1.1185 Acc: 0.9574 | Val Loss: 1.0296 Acc: 0.9597 MacroF1: 0.9424 | LR: 1.39e-04 | Time: 4.4s
+Epoch 033/040 | Train Loss: 1.1080 Acc: 0.9574 | Val Loss: 1.0194 Acc: 0.9573 MacroF1: 0.9390 | LR: 1.11e-04 | Time: 6.0s
+Epoch 034/040 | Train Loss: 1.0957 Acc: 0.9604 | Val Loss: 1.0293 Acc: 0.9621 MacroF1: 0.9445 | LR: 8.57e-05 | Time: 4.9s
+Epoch 035/040 | Train Loss: 1.0907 Acc: 0.9577 | Val Loss: 1.0255 Acc: 0.9526 MacroF1: 0.9491 | LR: 6.35e-05 | Time: 4.3s
+Epoch 036/040 | Train Loss: 1.0838 Acc: 0.9638 | Val Loss: 1.0168 Acc: 0.9597 MacroF1: 0.9300 | LR: 4.44e-05 | Time: 6.0s
+Epoch 037/040 | Train Loss: 1.0860 Acc: 0.9683 | Val Loss: 1.0202 Acc: 0.9597 MacroF1: 0.9417 | LR: 2.86e-05 | Time: 4.8s
+Epoch 038/040 | Train Loss: 1.0801 Acc: 0.9669 | Val Loss: 1.0125 Acc: 0.9645 MacroF1: 0.9471 | LR: 1.61e-05 | Time: 4.5s
+Epoch 039/040 | Train Loss: 1.0711 Acc: 0.9642 | Val Loss: 1.0080 Acc: 0.9621 MacroF1: 0.9448 | LR: 7.19e-06 | Time: 6.1s
+Epoch 040/040 | Train Loss: 1.0736 Acc: 0.9662 | Val Loss: 1.0140 Acc: 0.9645 MacroF1: 0.9471 | LR: 1.80e-06 | Time: 4.6s
+Training finished. Evaluating on validation split...
+Evaluating on test split...
+
+===== NOTE THIS FOR PPT =====
+Run Name       : custom_v5_margnet
+Model & Variant: custom v5
+Description    : variant v5, augment true, class_weights true, label_smoothing 0.1, dropout 0.4
+Parameters     : 1,191,463
+Model Size     : 4.55 MB
+Epochs Run     : 40 (Best: 35)
+Total Time     : 3.6 mins
+Device         : cuda
+
+--- Validation ---
+Accuracy : 0.9502
+Macro F1 : 0.9466
+
+--- Test ---
+Accuracy : 0.9557
+Top-3 Acc: 0.9832
+Macro P  : 0.9551
+Macro R  : 0.9542
+Macro F1 : 0.9518
+Weight F1: 0.9561
+
+Worst F1 Classes: dangerous_dip (0.80), pedestrian_crossing (0.80), staggered_intersection (0.80)
+Most Confused   : quay_side_or_river_bank->dangerous_dip (3), bullock_cart_and_hand_cart_prohibited->overtaking_prohibited (2), falling_rocks->pedestrian_crossing (2)
+===== END NOTE =====

@@ -1,0 +1,25 @@
+===== NOTE THIS FOR PPT =====
+Run Name       : custom_v5_margnet
+Model & Variant: custom v5
+Description    : variant v5, augment true, class_weights true, label_smoothing 0.1, dropout 0.4
+Parameters     : 1,191,463
+Model Size     : 4.55 MB
+Epochs Run     : 40 (Best: 35)
+Total Time     : 3.6 mins
+Device         : cuda
+
+--- Validation ---
+Accuracy : 0.9502
+Macro F1 : 0.9466
+
+--- Test ---
+Accuracy : 0.9557
+Top-3 Acc: 0.9832
+Macro P  : 0.9551
+Macro R  : 0.9542
+Macro F1 : 0.9518
+Weight F1: 0.9561
+
+Worst F1 Classes: dangerous_dip (0.80), pedestrian_crossing (0.80), staggered_intersection (0.80)
+Most Confused   : quay_side_or_river_bank->dangerous_dip (3), bullock_cart_and_hand_cart_prohibited->overtaking_prohibited (2), falling_rocks->pedestrian_crossing (2)
+===== END NOTE =====

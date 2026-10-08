@@ -1,0 +1,8 @@
+| name                   | type                        | output_shape   |   parameter_count | description                                                                                               |
+|:-----------------------|:----------------------------|:---------------|------------------:|:----------------------------------------------------------------------------------------------------------|
+| ConvBlock 1            | Sequential                  | (32, 32, 32)   |             10208 | Extracts primary visual elements like lines, edges and basic colours.                                     |
+| ConvBlock 2            | Sequential                  | (64, 16, 16)   |             55552 | Detects intermediate shapes such as circles, triangles and corners.                                       |
+| ConvBlock 3            | Sequential                  | (128, 8, 8)    |            221696 | Identifies complex symbols and patterns specific to traffic signs.                                        |
+| ConvBlock 4            | Sequential                  | (256, 4, 4)    |            885760 | Captures highly abstract, deep semantic features of the entire sign.                                      |
+| Global Average Pooling | AdaptiveAvgPool2d + Flatten | (256,)         |                 0 | Summarises each feature map into a single number, greatly reducing parameters and preventing overfitting. |
+| Dense                  | Dropout + Linear            | (75,)          |             19275 | Computes the final probabilities for each traffic sign class.                                             |

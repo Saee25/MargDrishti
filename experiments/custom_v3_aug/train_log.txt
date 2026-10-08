@@ -1,0 +1,53 @@
+============================================================
+RUN NAME:      custom_v3_aug
+MODEL:         custom (Variant: v3)
+PARAMETERS:    2,209,127
+DEVICE:        cuda
+CLASSES (K):   71
+DATA SPLITS:   Train: 2932 | Val: 422 | Test: 835
+------------------------------------------------------------
+EPOCHS:        40
+BATCH SIZE:    64
+LEARNING RATE: 0.001
+============================================================
+Training started on cuda
+Epoch 001/040 | Train Loss: 44.1048 Acc: 0.0113 | Val Loss: 22.1790 Acc: 0.0190 MacroF1: 0.0050 | LR: 1.00e-05 | Time: 10.2s
+Epoch 002/040 | Train Loss: 8.5429 Acc: 0.0167 | Val Loss: 4.2564 Acc: 0.0213 MacroF1: 0.0032 | LR: 3.40e-04 | Time: 5.2s
+Epoch 003/040 | Train Loss: 4.2666 Acc: 0.0167 | Val Loss: 4.3032 Acc: 0.0237 MacroF1: 0.0044 | LR: 6.70e-04 | Time: 6.4s
+Epoch 004/040 | Train Loss: 4.2789 Acc: 0.0184 | Val Loss: 4.2608 Acc: 0.0118 MacroF1: 0.0004 | LR: 1.00e-03 | Time: 5.2s
+Epoch 005/040 | Train Loss: 4.2697 Acc: 0.0153 | Val Loss: 4.2612 Acc: 0.0047 MacroF1: 0.0001 | LR: 9.98e-04 | Time: 4.3s
+Epoch 006/040 | Train Loss: 4.2628 Acc: 0.0167 | Val Loss: 4.2611 Acc: 0.0118 MacroF1: 0.0003 | LR: 9.93e-04 | Time: 5.5s
+Epoch 007/040 | Train Loss: 4.2647 Acc: 0.0160 | Val Loss: 4.2639 Acc: 0.0166 MacroF1: 0.0005 | LR: 9.84e-04 | Time: 5.2s
+Epoch 008/040 | Train Loss: 4.2598 Acc: 0.0184 | Val Loss: 4.2626 Acc: 0.0166 MacroF1: 0.0005 | LR: 9.71e-04 | Time: 4.5s
+Epoch 009/040 | Train Loss: 4.2569 Acc: 0.0191 | Val Loss: 4.2627 Acc: 0.0166 MacroF1: 0.0005 | LR: 9.56e-04 | Time: 5.2s
+Early stopping triggered after 9 epochs.
+Training finished. Evaluating on validation split...
+Evaluating on test split...
+
+===== NOTE THIS FOR PPT =====
+Run Name       : custom_v3_aug
+Model & Variant: custom v3
+Description    : variant v3, augment true, class_weights false, label_smoothing 0, dropout 0.5
+Parameters     : 2,209,127
+Model Size     : 8.43 MB
+Epochs Run     : 9 (Best: 1)
+Total Time     : 0.9 mins
+Device         : cuda
+
+--- Validation ---
+Accuracy : 0.0190
+Macro F1 : 0.0050
+
+--- Test ---
+Accuracy : 0.0156
+Top-3 Acc: 0.0431
+Macro P  : 0.0056
+Macro R  : 0.0172
+Macro F1 : 0.0076
+Weight F1: 0.0080
+
+Worst F1 Classes: all_motor_vehicle_prohibited (0.00), axle_load_limit (0.00), bullock_cart_and_hand_cart_prohibited (0.00)
+Most Confused   : restriction_ends->unguarded_level_crossing (15), pass_either_side->unguarded_level_crossing (10), compulsary_turn_left_ahead->unguarded_level_crossing (8)
+===== END NOTE =====
+
+WARNING: Test accuracy (0.0156) is below 5x chance level (0.0704). This suggests a bug.

@@ -1,0 +1,34 @@
+{
+    "run_name": "custom_v1_plain",
+    "description": "variant v1, augment false, class_weights false, label_smoothing 0, dropout 0.5",
+    "model": "custom",
+    "variant": "v1",
+    "parameters": 2208903,
+    "size_mb": 8.42629623413086,
+    "best_epoch": 28,
+    "epochs_run": 36,
+    "total_time_s": 59.34500503540039,
+    "device": "cuda",
+    "val_metrics": {
+        "accuracy": 0.9383886255924171,
+        "macro_precision": 0.9489956903000383,
+        "macro_recall": 0.9492811134115483,
+        "macro_f1": 0.9431970781694835,
+        "weighted_precision": 0.9497354146643247,
+        "weighted_recall": 0.9383886255924171,
+        "weighted_f1": 0.9378504271818578,
+        "top1_accuracy": 0.9383886255924171,
+        "top3_accuracy": 0.9644549763033176
+    },
+    "test_metrics": {
+        "accuracy": 0.9173652694610779,
+        "macro_precision": 0.9128580043991241,
+        "macro_recall": 0.9133844097079391,
+        "macro_f1": 0.9084694246287033,
+        "weighted_precision": 0.9233893370008293,
+        "weighted_recall": 0.9173652694610779,
+        "weighted_f1": 0.9168031647953846,
+        "top1_accuracy": 0.9173652694610779,
+        "top3_accuracy": 0.9652694610778443
+    }
+}

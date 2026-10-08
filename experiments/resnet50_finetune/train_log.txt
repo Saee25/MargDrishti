@@ -1,0 +1,53 @@
+============================================================
+RUN NAME:      resnet50_finetune
+MODEL:         resnet50 (Variant: default)
+PARAMETERS:    23,653,511
+DEVICE:        cuda
+CLASSES (K):   71
+DATA SPLITS:   Train: 2932 | Val: 422 | Test: 835
+------------------------------------------------------------
+EPOCHS:        15
+BATCH SIZE:    32
+LEARNING RATE: 0.001
+============================================================
+Initialised model weights from experiments/resnet50_frozen/best.pt
+Ensured all model parameters are trainable.
+Training started on cuda
+Epoch 001/015 | Train Loss: 3.0653 Acc: 0.3414 | Val Loss: 2.7262 Acc: 0.4100 MacroF1: 0.4047 | LR: 1.00e-06 | Time: 33.0s
+Epoch 002/015 | Train Loss: 1.8766 Acc: 0.6787 | Val Loss: 1.4107 Acc: 0.8294 MacroF1: 0.8112 | LR: 5.05e-05 | Time: 30.4s
+Epoch 003/015 | Train Loss: 1.2023 Acc: 0.8973 | Val Loss: 1.0022 Acc: 0.9550 MacroF1: 0.9556 | LR: 1.00e-04 | Time: 34.4s
+Epoch 004/015 | Train Loss: 0.9607 Acc: 0.9754 | Val Loss: 0.9203 Acc: 0.9787 MacroF1: 0.9656 | LR: 9.85e-05 | Time: 32.6s
+Epoch 005/015 | Train Loss: 0.9054 Acc: 0.9870 | Val Loss: 0.8764 Acc: 0.9858 MacroF1: 0.9834 | LR: 9.43e-05 | Time: 32.7s
+Epoch 006/015 | Train Loss: 0.8707 Acc: 0.9901 | Val Loss: 0.8612 Acc: 0.9834 MacroF1: 0.9681 | LR: 8.74e-05 | Time: 34.4s
+Epoch 007/015 | Train Loss: 0.8474 Acc: 0.9959 | Val Loss: 0.8706 Acc: 0.9739 MacroF1: 0.9720 | LR: 7.84e-05 | Time: 34.2s
+Epoch 008/015 | Train Loss: 0.8411 Acc: 0.9945 | Val Loss: 0.8366 Acc: 0.9810 MacroF1: 0.9665 | LR: 6.77e-05 | Time: 33.1s
+Epoch 009/015 | Train Loss: 0.8280 Acc: 0.9962 | Val Loss: 0.8364 Acc: 0.9787 MacroF1: 0.9621 | LR: 5.60e-05 | Time: 32.6s
+Early stopping triggered after 9 epochs.
+Training finished. Evaluating on validation split...
+Evaluating on test split...
+
+===== NOTE THIS FOR PPT =====
+Run Name       : resnet50_finetune
+Model & Variant: resnet50 default
+Description    : 
+Parameters     : 23,653,511
+Model Size     : 90.23 MB
+Epochs Run     : 9 (Best: 5)
+Total Time     : 5.5 mins
+Device         : cuda
+
+--- Validation ---
+Accuracy : 0.9858
+Macro F1 : 0.9834
+
+--- Test ---
+Accuracy : 0.9832
+Top-3 Acc: 0.9964
+Macro P  : 0.9799
+Macro R  : 0.9805
+Macro F1 : 0.9786
+Weight F1: 0.9832
+
+Worst F1 Classes: steep_descent (0.80), length_limit (0.83), bullock_cart_and_hand_cart_prohibited (0.86)
+Most Confused   : bullock_cart_and_hand_cart_prohibited->pedestrian_prohibited (2), all_motor_vehicle_prohibited->truck_prohibited (1), compulsary_sound_horn->horn_prohibited (1)
+===== END NOTE =====
