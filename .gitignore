@@ -33,3 +33,4 @@ experiments/_smoke*/
 *_extracted/
 colab_results/
 *.log
+generate_frontend*.py
