@@ -88,6 +88,8 @@ class Trainer:
         if hasattr(self.model, "get_parameter_groups"):
             param_groups = self.model.get_parameter_groups(
                 lr=self.config.train.get("lr", 0.001),
+                lr_backbone=self.config.train.get("lr_backbone"),
+                lr_head=self.config.train.get("lr_head"),
                 weight_decay=self.config.train.get("weight_decay", 0.0)
             )
             self.optimizer = AdamW(param_groups)
@@ -123,6 +125,19 @@ class Trainer:
         self.best_metric = 0.0
         self.epochs_without_improvement = 0
         self.history = []
+        
+        init_from = self.config.train.get("init_from")
+        if init_from and Path(init_from).exists():
+            checkpoint = torch.load(init_from, map_location=self.device)
+            self.model.load_state_dict(checkpoint["model_state"])
+            print(f"Initialised model weights from {init_from}")
+            
+        if self.config.train.get("freeze_backbone") and hasattr(self.model, "freeze_backbone"):
+            self.model.freeze_backbone()
+            print("Froze model backbone parameters.")
+        elif hasattr(self.model, "unfreeze_all"):
+            self.model.unfreeze_all()
+            print("Ensured all model parameters are trainable.")
         
         if resume_path and Path(resume_path).exists():
             self._load_resume_checkpoint(resume_path)

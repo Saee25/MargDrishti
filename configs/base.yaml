@@ -23,7 +23,7 @@ data:
 model:
   name: "custom"                 # Name of the model family ('custom' or 'resnet50')
   variant: "v5"                  # Variant of the custom CNN
-  img_size: 64                   # Input image size (e.g. 64 for custom, 224 for resnet50)
+  img_size: 64                   # Input image size (e.g. 64 for custom, 224 for resnet50). Use 160 as explicit last-resort fallback for resnet50 if Colab is too slow.
   dropout: 0.4                   # Dropout rate for the classification head
 
 train:

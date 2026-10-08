@@ -52,32 +52,35 @@ def main():
     num_classes = 75
     
     variants = [
-        ("v1", "custom_v1_plain"),
-        ("v2", "custom_v2_bn"),
-        ("v3", "custom_v3_aug"),
-        ("v4", "custom_v4_weighted"),
-        ("v5", "custom_v5_margnet")
+        ("custom", "v1", "custom_v1_plain", 64),
+        ("custom", "v2", "custom_v2_bn", 64),
+        ("custom", "v3", "custom_v3_aug", 64),
+        ("custom", "v4", "custom_v4_weighted", 64),
+        ("custom", "v5", "custom_v5_margnet", 64),
+        ("resnet50", "default", "resnet50_frozen", 224)
     ]
     
     results = []
+    models = {}
     
-    for variant, name in variants:
-        model = build_model("custom", variant, num_classes)
+    for family, variant, name, img_size in variants:
+        model = build_model(family, variant, num_classes)
         model.eval()
         model.to(device)
+        models[f"{family}_{variant}"] = model
         
         # 1. torchinfo summary
-        with open(summary_dir / f"{variant}.txt", "w", encoding="utf-8") as f:
-            model_stats = summary(model, input_size=(1, 3, 64, 64), verbose=0)
+        with open(summary_dir / f"{family}_{variant}.txt", "w", encoding="utf-8") as f:
+            model_stats = summary(model, input_size=(1, 3, img_size, img_size), verbose=0)
             f.write(str(model_stats))
             
         # 2. describe()
         desc = model.describe()
-        with open(summary_dir / f"{variant}_layers.json", "w", encoding="utf-8") as f:
+        with open(summary_dir / f"{family}_{variant}_layers.json", "w", encoding="utf-8") as f:
             json.dump(desc, f, indent=2)
             
         df_desc = pd.DataFrame(desc)
-        with open(summary_dir / f"{variant}_layers.md", "w", encoding="utf-8") as f:
+        with open(summary_dir / f"{family}_{variant}_layers.md", "w", encoding="utf-8") as f:
             f.write(df_desc.to_markdown(index=False))
             
         # 3. figures
@@ -91,7 +94,7 @@ def main():
         size_mb = model_size_mb(model)
         
         # Output shape
-        dummy_in = torch.randn(1, 3, 64, 64)
+        dummy_in = torch.randn(1, 3, img_size, img_size).to(device)
         out = model(dummy_in)
         out_shape = tuple(out.shape)
         
@@ -109,6 +112,7 @@ def main():
         ms_per_image = ((t1 - t0) / n_iters) * 1000
         
         results.append({
+            "Family": family,
             "Variant": variant,
             "Total Params": f"{total:,}",
             "Trainable Params": f"{trainable:,}",
@@ -119,7 +123,27 @@ def main():
 
     df_results = pd.DataFrame(results)
     print("===== NOTE THIS FOR PPT =====")
+    print("Summary of all models:")
     print(df_results.to_markdown(index=False))
+    
+    # Comparison of MargNet vs ResNet50
+    margnet = models["custom_v5"]
+    resnet = models["resnet50_default"]
+    
+    margnet_total, _ = count_parameters(margnet)
+    resnet_total, _ = count_parameters(resnet)
+    
+    def count_convs(m):
+        return sum(1 for module in m.modules() if isinstance(module, torch.nn.Conv2d))
+        
+    comp = [
+        {"Metric": "Total Parameters", "MargNet": f"{margnet_total:,}", "ResNet50": f"{resnet_total:,}"},
+        {"Metric": "Size in MB", "MargNet": f"{model_size_mb(margnet):.2f}", "ResNet50": f"{model_size_mb(resnet):.2f}"},
+        {"Metric": "Conv Layers", "MargNet": count_convs(margnet), "ResNet50": count_convs(resnet)}
+    ]
+    df_comp = pd.DataFrame(comp)
+    print("\nComparison: MargNet vs ResNet50")
+    print(df_comp.to_markdown(index=False))
     print("===== END NOTE =====")
 
 if __name__ == "__main__":

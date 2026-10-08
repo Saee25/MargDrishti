@@ -39,8 +39,15 @@ Google Colab is a free, web-based Python environment that provides access to pow
    - Alternatively, you can manually download the `experiments` folder from `MyDrive/MargDrishti_Colab/experiments` on Google Drive.
    - Save the zip file in the root directory of your MargDrishti project on your laptop.
 
-9. **Next Steps**
-   - Once the results zip is saved in your project folder, start a new chat with Antigravity and use the Task 6B prompt.
+9. **Second Colab Trip (ResNet50)**
+   - After completing the custom CNN ablation study locally, you will train ResNet50 on Colab.
+   - Run `python -m scripts.pack_for_colab` locally to rebuild `margdrishti_colab.zip` with the new code.
+   - Re-upload `margdrishti_colab.zip` and the updated `notebooks/colab_training.ipynb` to Google Drive/Colab.
+   - Run the new ResNet50 cells at the bottom of the notebook. Note: The first run will download the ResNet50 weights from torchvision (about 100 MB).
+   - Once finished, the final cell will download `margdrishti_results_resnet.zip` to your laptop. Save it in the project root.
+
+## Fairness Note
+*The training time measured on Colab is on a cloud GPU and is not directly comparable to training time on your laptop's CPU. Always record the device per run and show it next to the training time in reports. Inference speed (how fast the model predicts) will be measured separately on your laptop, ensuring that comparison stays fair.*
 
 ## Common Problems & Fixes
 
@@ -50,4 +57,4 @@ Google Colab is a free, web-based Python environment that provides access to pow
 - **Session Lost**: If your session drops, simply reconnect, run the setup cells, and rerun the training cell to resume.
 - **Import Errors**: Ensure you have uploaded the correct and complete `margdrishti_colab.zip`.
 
-*Note: The training time measured on Colab is on a cloud GPU and is not directly comparable to training time on your laptop's CPU. Inference speed (how fast the model predicts) will be measured separately on your laptop.*
+- **Import Errors**: Ensure you have uploaded the correct and complete `margdrishti_colab.zip`.

@@ -20,7 +20,9 @@ def build_model(name, variant, num_classes, **kwargs):
         else:
             raise ValueError(f"Unknown custom variant: {variant}")
     elif name == "resnet50":
-        raise NotImplementedError("resnet50 is registered in Task 7.")
+        from .resnet import ResNet50Classifier
+        pretrained = kwargs.get("pretrained", True)
+        return ResNet50Classifier(num_classes=num_classes, dropout=kwargs.get("dropout", 0.3), pretrained=pretrained)
     else:
         raise ValueError(f"Unknown model name: {name}")
 
