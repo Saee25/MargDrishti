@@ -6,10 +6,11 @@ from PIL import Image
 class GradCAM:
     def __init__(self, model):
         self.model = model
-        self.target_layer = self.model.gradcam_target_layer()
+        # gradcam_target_layer is a @property, NOT a method – no () call.
+        self.target_layer = self.model.gradcam_target_layer
         self.gradients = None
         self.activations = None
-        
+
         # Register hooks
         self._fwd_hook = self.target_layer.register_forward_hook(self.save_activation)
         self._bwd_hook = self.target_layer.register_full_backward_hook(self.save_gradient)

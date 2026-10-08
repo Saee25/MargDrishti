@@ -1,0 +1,428 @@
+[
+  {
+    "index": 0,
+    "slug": "all_motor_vehicle_prohibited",
+    "display_name": "all-motor-vehicle-prohibited",
+    "original_category_id": 0
+  },
+  {
+    "index": 1,
+    "slug": "axle_load_limit",
+    "display_name": "axle load limit",
+    "original_category_id": 2
+  },
+  {
+    "index": 2,
+    "slug": "bullock_cart_and_hand_cart_prohibited",
+    "display_name": "bullock cart and hand cart prohibited",
+    "original_category_id": 3
+  },
+  {
+    "index": 3,
+    "slug": "cattle_ahead",
+    "display_name": "cattle ahead",
+    "original_category_id": 4
+  },
+  {
+    "index": 4,
+    "slug": "chevron_direction",
+    "display_name": "chevron direction",
+    "original_category_id": 5
+  },
+  {
+    "index": 5,
+    "slug": "compulsary_ahead",
+    "display_name": "compulsary ahead",
+    "original_category_id": 6
+  },
+  {
+    "index": 6,
+    "slug": "compulsary_ahead_or_turn_left",
+    "display_name": "compulsary ahead or turn left",
+    "original_category_id": 7
+  },
+  {
+    "index": 7,
+    "slug": "compulsary_ahead_or_turn_right",
+    "display_name": "compulsary ahead or turn right",
+    "original_category_id": 8
+  },
+  {
+    "index": 8,
+    "slug": "compulsary_keep_left",
+    "display_name": "compulsary keep left",
+    "original_category_id": 9
+  },
+  {
+    "index": 9,
+    "slug": "compulsary_keep_right",
+    "display_name": "compulsary keep right",
+    "original_category_id": 10
+  },
+  {
+    "index": 10,
+    "slug": "compulsary_sound_horn",
+    "display_name": "compulsary sound horn",
+    "original_category_id": 11
+  },
+  {
+    "index": 11,
+    "slug": "compulsary_turn_left_ahead",
+    "display_name": "compulsary turn left ahead",
+    "original_category_id": 12
+  },
+  {
+    "index": 12,
+    "slug": "compulsary_turn_right_ahead",
+    "display_name": "compulsary turn right ahead",
+    "original_category_id": 13
+  },
+  {
+    "index": 13,
+    "slug": "cross_road",
+    "display_name": "cross road",
+    "original_category_id": 14
+  },
+  {
+    "index": 14,
+    "slug": "cycle_crossing",
+    "display_name": "cycle crossing",
+    "original_category_id": 15
+  },
+  {
+    "index": 15,
+    "slug": "dangerous_dip",
+    "display_name": "dangerous dip",
+    "original_category_id": 17
+  },
+  {
+    "index": 16,
+    "slug": "falling_rocks",
+    "display_name": "falling rocks",
+    "original_category_id": 18
+  },
+  {
+    "index": 17,
+    "slug": "gap_in_median",
+    "display_name": "gap in median",
+    "original_category_id": 19
+  },
+  {
+    "index": 18,
+    "slug": "give_way",
+    "display_name": "give way",
+    "original_category_id": 20
+  },
+  {
+    "index": 19,
+    "slug": "guarded_level_crossing",
+    "display_name": "guarded level crossing",
+    "original_category_id": 21
+  },
+  {
+    "index": 20,
+    "slug": "height_limit",
+    "display_name": "height limit",
+    "original_category_id": 22
+  },
+  {
+    "index": 21,
+    "slug": "horn_prohibited",
+    "display_name": "horn prohibited",
+    "original_category_id": 23
+  },
+  {
+    "index": 22,
+    "slug": "hospital_ahead",
+    "display_name": "hospital ahead",
+    "original_category_id": 24
+  },
+  {
+    "index": 23,
+    "slug": "hump_or_rough_road",
+    "display_name": "hump or rough road",
+    "original_category_id": 25
+  },
+  {
+    "index": 24,
+    "slug": "left_hand_curve",
+    "display_name": "left hand curve",
+    "original_category_id": 26
+  },
+  {
+    "index": 25,
+    "slug": "left_reverse_bend",
+    "display_name": "left reverse bend",
+    "original_category_id": 27
+  },
+  {
+    "index": 26,
+    "slug": "left_turn_prohibited",
+    "display_name": "left turn prohibited",
+    "original_category_id": 28
+  },
+  {
+    "index": 27,
+    "slug": "length_limit",
+    "display_name": "length limit",
+    "original_category_id": 29
+  },
+  {
+    "index": 28,
+    "slug": "loose_gravel",
+    "display_name": "loose gravel",
+    "original_category_id": 30
+  },
+  {
+    "index": 29,
+    "slug": "men_at_work",
+    "display_name": "men at work",
+    "original_category_id": 31
+  },
+  {
+    "index": 30,
+    "slug": "narrow_bridge_ahead",
+    "display_name": "narrow bridge ahead",
+    "original_category_id": 32
+  },
+  {
+    "index": 31,
+    "slug": "narrow_road_ahead",
+    "display_name": "narrow road ahead",
+    "original_category_id": 33
+  },
+  {
+    "index": 32,
+    "slug": "no_entry",
+    "display_name": "no entry",
+    "original_category_id": 34
+  },
+  {
+    "index": 33,
+    "slug": "no_parking",
+    "display_name": "no parking",
+    "original_category_id": 35
+  },
+  {
+    "index": 34,
+    "slug": "no_stopping_or_standing",
+    "display_name": "no stopping or standing",
+    "original_category_id": 36
+  },
+  {
+    "index": 35,
+    "slug": "overtaking_prohibited",
+    "display_name": "overtaking prohibited",
+    "original_category_id": 37
+  },
+  {
+    "index": 36,
+    "slug": "pass_either_side",
+    "display_name": "pass either side",
+    "original_category_id": 38
+  },
+  {
+    "index": 37,
+    "slug": "pedestrian_crossing",
+    "display_name": "pedestrian crossing",
+    "original_category_id": 39
+  },
+  {
+    "index": 38,
+    "slug": "pedestrian_prohibited",
+    "display_name": "pedestrian prohibited",
+    "original_category_id": 40
+  },
+  {
+    "index": 39,
+    "slug": "petrol_pump_ahead",
+    "display_name": "petrol pump ahead",
+    "original_category_id": 41
+  },
+  {
+    "index": 40,
+    "slug": "quay_side_or_river_bank",
+    "display_name": "quay side or river bank",
+    "original_category_id": 42
+  },
+  {
+    "index": 41,
+    "slug": "restriction_ends",
+    "display_name": "restriction ends",
+    "original_category_id": 43
+  },
+  {
+    "index": 42,
+    "slug": "right_hand_curve",
+    "display_name": "right hand curve",
+    "original_category_id": 44
+  },
+  {
+    "index": 43,
+    "slug": "right_reverse_bend",
+    "display_name": "right reverse bend",
+    "original_category_id": 45
+  },
+  {
+    "index": 44,
+    "slug": "right_turn_prohibited",
+    "display_name": "right turn prohibited",
+    "original_category_id": 46
+  },
+  {
+    "index": 45,
+    "slug": "roundabout",
+    "display_name": "roundabout",
+    "original_category_id": 48
+  },
+  {
+    "index": 46,
+    "slug": "school_ahead",
+    "display_name": "school ahead",
+    "original_category_id": 49
+  },
+  {
+    "index": 47,
+    "slug": "side_road_left",
+    "display_name": "side road left",
+    "original_category_id": 50
+  },
+  {
+    "index": 48,
+    "slug": "side_road_right",
+    "display_name": "side road right",
+    "original_category_id": 51
+  },
+  {
+    "index": 49,
+    "slug": "slippery_road",
+    "display_name": "slippery road",
+    "original_category_id": 52
+  },
+  {
+    "index": 50,
+    "slug": "speed_limit_100",
+    "display_name": "speed limit 100",
+    "original_category_id": 53
+  },
+  {
+    "index": 51,
+    "slug": "speed_limit_120",
+    "display_name": "speed limit 120",
+    "original_category_id": 54
+  },
+  {
+    "index": 52,
+    "slug": "speed_limit_20",
+    "display_name": "speed limit 20",
+    "original_category_id": 56
+  },
+  {
+    "index": 53,
+    "slug": "speed_limit_30",
+    "display_name": "speed limit 30",
+    "original_category_id": 57
+  },
+  {
+    "index": 54,
+    "slug": "speed_limit_40",
+    "display_name": "speed limit 40",
+    "original_category_id": 58
+  },
+  {
+    "index": 55,
+    "slug": "speed_limit_50",
+    "display_name": "speed limit 50",
+    "original_category_id": 59
+  },
+  {
+    "index": 56,
+    "slug": "speed_limit_60",
+    "display_name": "speed limit 60",
+    "original_category_id": 60
+  },
+  {
+    "index": 57,
+    "slug": "speed_limit_70",
+    "display_name": "speed limit 70",
+    "original_category_id": 61
+  },
+  {
+    "index": 58,
+    "slug": "speed_limit_80",
+    "display_name": "speed limit 80",
+    "original_category_id": 62
+  },
+  {
+    "index": 59,
+    "slug": "staggered_intersection",
+    "display_name": "staggered intersection",
+    "original_category_id": 63
+  },
+  {
+    "index": 60,
+    "slug": "steep_ascent",
+    "display_name": "steep ascent",
+    "original_category_id": 64
+  },
+  {
+    "index": 61,
+    "slug": "steep_descent",
+    "display_name": "steep descent",
+    "original_category_id": 65
+  },
+  {
+    "index": 62,
+    "slug": "stop",
+    "display_name": "stop",
+    "original_category_id": 66
+  },
+  {
+    "index": 63,
+    "slug": "t_intersection",
+    "display_name": "t intersection",
+    "original_category_id": 68
+  },
+  {
+    "index": 64,
+    "slug": "traffic_signal",
+    "display_name": "traffic signal",
+    "original_category_id": 69
+  },
+  {
+    "index": 65,
+    "slug": "truck_prohibited",
+    "display_name": "truck prohibited",
+    "original_category_id": 70
+  },
+  {
+    "index": 66,
+    "slug": "u_turn",
+    "display_name": "u turn",
+    "original_category_id": 71
+  },
+  {
+    "index": 67,
+    "slug": "u_turn_prohibited",
+    "display_name": "u turn prohibited",
+    "original_category_id": 72
+  },
+  {
+    "index": 68,
+    "slug": "unguarded_level_crossing",
+    "display_name": "unguarded level crossing",
+    "original_category_id": 73
+  },
+  {
+    "index": 69,
+    "slug": "width_limit",
+    "display_name": "width limit",
+    "original_category_id": 74
+  },
+  {
+    "index": 70,
+    "slug": "y_intersection",
+    "display_name": "y intersection",
+    "original_category_id": 75
+  }
+]

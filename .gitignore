@@ -31,3 +31,7 @@ experiments/*
 !experiments/.gitkeep
 reports/*
 !reports/.gitkeep
+
+# Ignore generated media and sample artifacts
+backend/artifacts/figures/
+backend/artifacts/samples/

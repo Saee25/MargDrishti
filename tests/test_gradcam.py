@@ -16,6 +16,7 @@ class MockModel(nn.Module):
         x = x.view(x.size(0), -1)
         return self.fc(x)
         
+    @property
     def gradcam_target_layer(self):
         return self.conv
 

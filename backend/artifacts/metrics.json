@@ -1,0 +1,104 @@
+{
+  "margnet": {
+    "run_name": "custom_v5_margnet",
+    "description": "variant v5, augment true, class_weights true, label_smoothing 0.1, dropout 0.4",
+    "model": "custom",
+    "variant": "v5",
+    "parameters": 1191463,
+    "size_mb": 4.545070648193359,
+    "best_epoch": 35,
+    "epochs_run": 40,
+    "total_time_s": 215.4500789642334,
+    "device": "cuda",
+    "val_metrics": {
+      "accuracy": 0.9502369668246445,
+      "macro_precision": 0.9502999416042893,
+      "macro_recall": 0.9553140096618358,
+      "macro_f1": 0.9465567700074362,
+      "weighted_precision": 0.962707671475444,
+      "weighted_recall": 0.9502369668246445,
+      "weighted_f1": 0.9508960511485346,
+      "top1_accuracy": 0.9502369668246445,
+      "top3_accuracy": 0.990521327014218
+    },
+    "test_metrics": {
+      "accuracy": 0.9556886227544911,
+      "macro_precision": 0.9551064243902216,
+      "macro_recall": 0.9542091619142157,
+      "macro_f1": 0.9517542239164241,
+      "weighted_precision": 0.9619269793044621,
+      "weighted_recall": 0.9556886227544911,
+      "weighted_f1": 0.956095275322189,
+      "top1_accuracy": 0.9556886227544911,
+      "top3_accuracy": 0.9832335329341317
+    }
+  },
+  "resnet50_frozen": {
+    "run_name": "resnet50_frozen",
+    "description": "",
+    "model": "resnet50",
+    "variant": "default",
+    "parameters": 23653511,
+    "size_mb": 90.23098373413086,
+    "best_epoch": 6,
+    "epochs_run": 6,
+    "total_time_s": 167.9948251247406,
+    "device": "cuda",
+    "val_metrics": {
+      "accuracy": 0.5924170616113744,
+      "macro_precision": 0.6436166173008278,
+      "macro_recall": 0.5946288844176169,
+      "macro_f1": 0.5704654496851614,
+      "weighted_precision": 0.697124889813216,
+      "weighted_recall": 0.5924170616113744,
+      "weighted_f1": 0.5956327904694718,
+      "top1_accuracy": 0.5924170616113744,
+      "top3_accuracy": 0.7890995260663507
+    },
+    "test_metrics": {
+      "accuracy": 0.5880239520958084,
+      "macro_precision": 0.6420875527903278,
+      "macro_recall": 0.59609085451049,
+      "macro_f1": 0.5750346343078084,
+      "weighted_precision": 0.6666065988945173,
+      "weighted_recall": 0.5880239520958084,
+      "weighted_f1": 0.5843748890318992,
+      "top1_accuracy": 0.5880239520958084,
+      "top3_accuracy": 0.8
+    }
+  },
+  "resnet50_finetune": {
+    "run_name": "resnet50_finetune",
+    "description": "",
+    "model": "resnet50",
+    "variant": "default",
+    "parameters": 23653511,
+    "size_mb": 90.23098373413086,
+    "best_epoch": 5,
+    "epochs_run": 9,
+    "total_time_s": 327.0470390319824,
+    "device": "cuda",
+    "val_metrics": {
+      "accuracy": 0.985781990521327,
+      "macro_precision": 0.986617569226265,
+      "macro_recall": 0.9837589141936967,
+      "macro_f1": 0.9833737499594278,
+      "weighted_precision": 0.988496706032251,
+      "weighted_recall": 0.985781990521327,
+      "weighted_f1": 0.9858119064747166,
+      "top1_accuracy": 0.985781990521327,
+      "top3_accuracy": 0.995260663507109
+    },
+    "test_metrics": {
+      "accuracy": 0.9832335329341317,
+      "macro_precision": 0.979866274294609,
+      "macro_recall": 0.9804862080752718,
+      "macro_f1": 0.9786272560641157,
+      "weighted_precision": 0.9853247439422148,
+      "weighted_recall": 0.9832335329341317,
+      "weighted_f1": 0.983221200526978,
+      "top1_accuracy": 0.9832335329341317,
+      "top3_accuracy": 0.9964071856287425
+    }
+  }
+}

@@ -1,0 +1,29 @@
+{
+  "generated_at": "2026-10-09T00:08:55.364871",
+  "available_artifacts": [
+    ".gitkeep",
+    "ablation.json",
+    "benchmark.json",
+    "class_map.json",
+    "custom_v5_layers.json",
+    "dataset_stats.json",
+    "metrics.json",
+    "resnet50_default_layers.json"
+  ],
+  "models": [
+    "margnet.pt",
+    "resnet50.pt"
+  ],
+  "figures": [
+    "margnet_confusion_matrix.png",
+    "margnet_correct_grid.png",
+    "margnet_curves.png",
+    "margnet_misclassified_grid.png",
+    "margnet_per_class_f1.png",
+    "resnet50_confusion_matrix.png",
+    "resnet50_correct_grid.png",
+    "resnet50_curves.png",
+    "resnet50_misclassified_grid.png",
+    "resnet50_per_class_f1.png"
+  ]
+}

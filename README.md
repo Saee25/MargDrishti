@@ -67,3 +67,24 @@ Extract the dataset so that the split folders and annotation files are placed di
   `python -m scripts.import_run --zip margdrishti_results_custom.zip`
 - Generate the ablation report:
   `python -m scripts.ablation_report`
+
+## Run the Backend
+
+The backend must be started from the **project root** directory.
+
+```powershell
+# From the MargDrishti/ project root, with the virtual environment active:
+uvicorn backend.app.main:app --reload --port 8000
+```
+
+- The API will be available at **http://127.0.0.1:8000**
+- Interactive docs (Swagger UI) are at **http://127.0.0.1:8000/docs**
+- ReDoc is at **http://127.0.0.1:8000/redoc**
+
+On the first startup the server loads both model checkpoints from
+`backend/artifacts/models/`.  MargNet loads in about 1 s; ResNet50 takes
+about 10–15 s.  Once you see `Models loaded. Ready to serve requests.` in the
+terminal the API is accepting requests.
+
+> **Tip:** Open `/docs` and try `POST /api/predict` with an image from
+> `data/samples/` to see a live prediction with Grad-CAM overlay.
