@@ -1,0 +1,357 @@
+[
+  {
+    "file_name": "sample_000.jpg",
+    "true_class": "no_stopping_or_standing",
+    "class_index": 34
+  },
+  {
+    "file_name": "sample_001.jpg",
+    "true_class": "slippery_road",
+    "class_index": 49
+  },
+  {
+    "file_name": "sample_002.jpg",
+    "true_class": "overtaking_prohibited",
+    "class_index": 35
+  },
+  {
+    "file_name": "sample_003.jpg",
+    "true_class": "cattle_ahead",
+    "class_index": 3
+  },
+  {
+    "file_name": "sample_004.jpg",
+    "true_class": "all_motor_vehicle_prohibited",
+    "class_index": 0
+  },
+  {
+    "file_name": "sample_005.jpg",
+    "true_class": "pass_either_side",
+    "class_index": 36
+  },
+  {
+    "file_name": "sample_006.jpg",
+    "true_class": "traffic_signal",
+    "class_index": 64
+  },
+  {
+    "file_name": "sample_007.jpg",
+    "true_class": "narrow_bridge_ahead",
+    "class_index": 30
+  },
+  {
+    "file_name": "sample_008.jpg",
+    "true_class": "stop",
+    "class_index": 62
+  },
+  {
+    "file_name": "sample_009.jpg",
+    "true_class": "quay_side_or_river_bank",
+    "class_index": 40
+  },
+  {
+    "file_name": "sample_010.jpg",
+    "true_class": "compulsary_ahead_or_turn_left",
+    "class_index": 6
+  },
+  {
+    "file_name": "sample_011.jpg",
+    "true_class": "loose_gravel",
+    "class_index": 28
+  },
+  {
+    "file_name": "sample_012.jpg",
+    "true_class": "left_reverse_bend",
+    "class_index": 25
+  },
+  {
+    "file_name": "sample_013.jpg",
+    "true_class": "unguarded_level_crossing",
+    "class_index": 68
+  },
+  {
+    "file_name": "sample_014.jpg",
+    "true_class": "speed_limit_100",
+    "class_index": 50
+  },
+  {
+    "file_name": "sample_015.jpg",
+    "true_class": "bullock_cart_and_hand_cart_prohibited",
+    "class_index": 2
+  },
+  {
+    "file_name": "sample_016.jpg",
+    "true_class": "school_ahead",
+    "class_index": 46
+  },
+  {
+    "file_name": "sample_017.jpg",
+    "true_class": "u_turn",
+    "class_index": 66
+  },
+  {
+    "file_name": "sample_018.jpg",
+    "true_class": "compulsary_keep_right",
+    "class_index": 9
+  },
+  {
+    "file_name": "sample_019.jpg",
+    "true_class": "right_hand_curve",
+    "class_index": 42
+  },
+  {
+    "file_name": "sample_020.jpg",
+    "true_class": "compulsary_turn_right_ahead",
+    "class_index": 12
+  },
+  {
+    "file_name": "sample_021.jpg",
+    "true_class": "speed_limit_30",
+    "class_index": 53
+  },
+  {
+    "file_name": "sample_022.jpg",
+    "true_class": "steep_ascent",
+    "class_index": 60
+  },
+  {
+    "file_name": "sample_023.jpg",
+    "true_class": "speed_limit_120",
+    "class_index": 51
+  },
+  {
+    "file_name": "sample_024.jpg",
+    "true_class": "axle_load_limit",
+    "class_index": 1
+  },
+  {
+    "file_name": "sample_025.jpg",
+    "true_class": "truck_prohibited",
+    "class_index": 65
+  },
+  {
+    "file_name": "sample_026.jpg",
+    "true_class": "u_turn_prohibited",
+    "class_index": 67
+  },
+  {
+    "file_name": "sample_027.jpg",
+    "true_class": "t_intersection",
+    "class_index": 63
+  },
+  {
+    "file_name": "sample_028.jpg",
+    "true_class": "speed_limit_20",
+    "class_index": 52
+  },
+  {
+    "file_name": "sample_029.jpg",
+    "true_class": "hospital_ahead",
+    "class_index": 22
+  },
+  {
+    "file_name": "sample_030.jpg",
+    "true_class": "chevron_direction",
+    "class_index": 4
+  },
+  {
+    "file_name": "sample_031.jpg",
+    "true_class": "left_hand_curve",
+    "class_index": 24
+  },
+  {
+    "file_name": "sample_032.jpg",
+    "true_class": "length_limit",
+    "class_index": 27
+  },
+  {
+    "file_name": "sample_033.jpg",
+    "true_class": "dangerous_dip",
+    "class_index": 15
+  },
+  {
+    "file_name": "sample_034.jpg",
+    "true_class": "cross_road",
+    "class_index": 13
+  },
+  {
+    "file_name": "sample_035.jpg",
+    "true_class": "speed_limit_70",
+    "class_index": 57
+  },
+  {
+    "file_name": "sample_036.jpg",
+    "true_class": "falling_rocks",
+    "class_index": 16
+  },
+  {
+    "file_name": "sample_037.jpg",
+    "true_class": "restriction_ends",
+    "class_index": 41
+  },
+  {
+    "file_name": "sample_038.jpg",
+    "true_class": "give_way",
+    "class_index": 18
+  },
+  {
+    "file_name": "sample_039.jpg",
+    "true_class": "right_turn_prohibited",
+    "class_index": 44
+  },
+  {
+    "file_name": "sample_040.jpg",
+    "true_class": "no_parking",
+    "class_index": 33
+  },
+  {
+    "file_name": "sample_041.jpg",
+    "true_class": "petrol_pump_ahead",
+    "class_index": 39
+  },
+  {
+    "file_name": "sample_042.jpg",
+    "true_class": "steep_descent",
+    "class_index": 61
+  },
+  {
+    "file_name": "sample_043.jpg",
+    "true_class": "pedestrian_prohibited",
+    "class_index": 38
+  },
+  {
+    "file_name": "sample_044.jpg",
+    "true_class": "staggered_intersection",
+    "class_index": 59
+  },
+  {
+    "file_name": "sample_045.jpg",
+    "true_class": "right_reverse_bend",
+    "class_index": 43
+  },
+  {
+    "file_name": "sample_046.jpg",
+    "true_class": "hump_or_rough_road",
+    "class_index": 23
+  },
+  {
+    "file_name": "sample_047.jpg",
+    "true_class": "cycle_crossing",
+    "class_index": 14
+  },
+  {
+    "file_name": "sample_048.jpg",
+    "true_class": "narrow_road_ahead",
+    "class_index": 31
+  },
+  {
+    "file_name": "sample_049.jpg",
+    "true_class": "left_turn_prohibited",
+    "class_index": 26
+  },
+  {
+    "file_name": "sample_050.jpg",
+    "true_class": "speed_limit_60",
+    "class_index": 56
+  },
+  {
+    "file_name": "sample_051.jpg",
+    "true_class": "compulsary_turn_left_ahead",
+    "class_index": 11
+  },
+  {
+    "file_name": "sample_052.jpg",
+    "true_class": "compulsary_keep_left",
+    "class_index": 8
+  },
+  {
+    "file_name": "sample_053.jpg",
+    "true_class": "height_limit",
+    "class_index": 20
+  },
+  {
+    "file_name": "sample_054.jpg",
+    "true_class": "guarded_level_crossing",
+    "class_index": 19
+  },
+  {
+    "file_name": "sample_055.jpg",
+    "true_class": "compulsary_sound_horn",
+    "class_index": 10
+  },
+  {
+    "file_name": "sample_056.jpg",
+    "true_class": "y_intersection",
+    "class_index": 70
+  },
+  {
+    "file_name": "sample_057.jpg",
+    "true_class": "speed_limit_50",
+    "class_index": 55
+  },
+  {
+    "file_name": "sample_058.jpg",
+    "true_class": "speed_limit_80",
+    "class_index": 58
+  },
+  {
+    "file_name": "sample_059.jpg",
+    "true_class": "side_road_left",
+    "class_index": 47
+  },
+  {
+    "file_name": "sample_060.jpg",
+    "true_class": "compulsary_ahead",
+    "class_index": 5
+  },
+  {
+    "file_name": "sample_061.jpg",
+    "true_class": "pedestrian_crossing",
+    "class_index": 37
+  },
+  {
+    "file_name": "sample_062.jpg",
+    "true_class": "no_entry",
+    "class_index": 32
+  },
+  {
+    "file_name": "sample_063.jpg",
+    "true_class": "width_limit",
+    "class_index": 69
+  },
+  {
+    "file_name": "sample_064.jpg",
+    "true_class": "side_road_right",
+    "class_index": 48
+  },
+  {
+    "file_name": "sample_065.jpg",
+    "true_class": "speed_limit_40",
+    "class_index": 54
+  },
+  {
+    "file_name": "sample_066.jpg",
+    "true_class": "compulsary_ahead_or_turn_right",
+    "class_index": 7
+  },
+  {
+    "file_name": "sample_067.jpg",
+    "true_class": "roundabout",
+    "class_index": 45
+  },
+  {
+    "file_name": "sample_068.jpg",
+    "true_class": "men_at_work",
+    "class_index": 29
+  },
+  {
+    "file_name": "sample_069.jpg",
+    "true_class": "horn_prohibited",
+    "class_index": 21
+  },
+  {
+    "file_name": "sample_070.jpg",
+    "true_class": "gap_in_median",
+    "class_index": 17
+  }
+]

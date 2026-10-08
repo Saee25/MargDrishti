@@ -1,0 +1,48 @@
+project:
+  name: "MargDrishti"
+  seed: 42
+
+paths:
+  raw_dir: "data/raw"
+  processed_dir: "data/processed"
+  crops_dir: "data/processed/crops"
+  samples_dir: "data/samples"
+  experiments_dir: "experiments"
+  reports_dir: "reports"
+  artifacts_dir: "backend/artifacts"
+
+data:
+  crop_padding: 0.10             # Padding added around the bounding box (10%)
+  min_box_side: 20               # Skip bounding boxes where the shorter side is under 20 pixels
+  min_crops_per_class: 40        # Drop classes that have fewer than 40 crops in total
+  max_crop_side: 256             # Resize crop to this side if it is larger
+  num_workers: 2                 # Number of DataLoader workers
+  normalisation: "dataset"       # Normalisation method ('dataset' or 'imagenet')
+  cache_in_ram: true             # Keep decoded crops in memory to speed up training
+
+model:
+  name: "custom"                 # Name of the model family ('custom' or 'resnet50')
+  variant: "v5"                  # Variant of the custom CNN
+  img_size: 64                   # Input image size (e.g. 64 for custom, 224 for resnet50)
+  dropout: 0.4                   # Dropout rate for the classification head
+
+train:
+  epochs: 40                     # Number of training epochs
+  batch_size: 64                 # Batch size for training and validation
+  optimizer: "adamw"             # Optimizer ('adam' or 'adamw')
+  lr: 0.001                      # Initial learning rate
+  weight_decay: 0.0001           # Weight decay for regularization
+  scheduler: "cosine"            # Learning rate scheduler ('cosine')
+  min_lr: 0.00001                # Minimum learning rate for scheduler
+  warmup_epochs: 3               # Number of epochs for learning rate warmup
+  early_stopping_patience: 8     # Stop training if validation metric does not improve for 8 epochs
+  monitor: "val_macro_f1"        # Metric to monitor for early stopping and best model saving
+  label_smoothing: 0.0           # Label smoothing for cross entropy loss
+  class_weights: false           # Whether to use class-weighted cross entropy
+  augment: false                 # Whether to apply data augmentation during training
+  amp: "auto"                    # Automatic Mixed Precision ('auto', true, false)
+  grad_clip: 5.0                 # Max norm for gradient clipping
+
+smoke:
+  max_per_class: 8               # Maximum crops per class for smoke testing
+  epochs: 2                      # Number of epochs for smoke testing
