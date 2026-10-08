@@ -7,6 +7,7 @@ import shutil
 import platform
 import subprocess
 from pathlib import Path
+import pandas as pd
 
 import torch
 
@@ -220,6 +221,18 @@ Most Confused   : {confused_str}
         f.write(note_block)
         
     if not args.smoke:
+        try:
+            history_df = pd.read_csv(out_dir / "history.csv")
+            val_accs = history_df["val_acc"].tolist()
+            if len(val_accs) > 1 and max(val_accs) <= val_accs[0]:
+                print("\nWARNING: Validation accuracy never rose above its first-epoch value. This suggests a bug or learning failure.")
+        except Exception as e:
+            pass
+            
+        chance_level = 1.0 / num_classes
+        if test_metrics["accuracy"] < 5 * chance_level:
+            print(f"\nWARNING: Test accuracy ({test_metrics['accuracy']:.4f}) is below 5x chance level ({5*chance_level:.4f}). This suggests a bug.")
+
         append_to_results_log(
             run_name=run_name,
             model_name=config.model.name,

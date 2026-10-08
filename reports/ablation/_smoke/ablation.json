@@ -1,0 +1,50 @@
+[
+    {
+        "step":"custom_v1_plain",
+        "run_name":"_smoke_custom_v1_plain",
+        "description":"Baseline CNN (V1)",
+        "parameters":2208903,
+        "best_epoch":2,
+        "train_acc":0.0,
+        "val_acc":0.0100755668,
+        "test_acc":0.0273224044,
+        "test_macro_f1":0.0177707351,
+        "test_top3_acc":0.0710382514,
+        "overfit_gap":-0.0100755668,
+        "train_time_min":0.5543138027,
+        "acc_change_pct_pt":0.0,
+        "f1_change_pct_pt":0.0
+    },
+    {
+        "step":"custom_v2_bn",
+        "run_name":"_smoke_custom_v2_bn",
+        "description":"+ BatchNorm (V2)",
+        "parameters":2209127,
+        "best_epoch":2,
+        "train_acc":0.0158450704,
+        "val_acc":0.0277078086,
+        "test_acc":0.0400728597,
+        "test_macro_f1":0.0245561222,
+        "test_top3_acc":0.0765027322,
+        "overfit_gap":-0.0118627381,
+        "train_time_min":0.624890693,
+        "acc_change_pct_pt":1.2750455373,
+        "f1_change_pct_pt":0.6785387184
+    },
+    {
+        "step":"custom_v5_margnet",
+        "run_name":"_smoke_custom_v5_margnet",
+        "description":"+ MargNet (V5, Label Smoothing)",
+        "parameters":1191463,
+        "best_epoch":2,
+        "train_acc":0.0176056338,
+        "val_acc":0.0478589421,
+        "test_acc":0.0364298725,
+        "test_macro_f1":0.0137782811,
+        "test_top3_acc":0.0928961749,
+        "overfit_gap":-0.0302533083,
+        "train_time_min":0.7385718028,
+        "acc_change_pct_pt":-0.364298725,
+        "f1_change_pct_pt":-1.0777841159
+    }
+]

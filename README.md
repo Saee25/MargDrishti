@@ -43,4 +43,27 @@ Extract the dataset so that the split folders and annotation files are placed di
    ```
 
 ## Workflow
-[Placeholders for future tasks]
+### 1. Data Preparation
+- `python -m scripts.build_crops`
+- `python -m scripts.compute_stats`
+- `python -m scripts.preview_data`
+
+### 2. Time Probe
+- Run a quick time probe to estimate training duration:
+  `python -m scripts.time_probe --config configs/experiments/custom_v5_margnet.yaml`
+
+### 3. Pack for Colab
+- Bundle files for cloud training:
+  `python -m scripts.pack_for_colab`
+
+### 4. Train on Google Colab
+- See `notebooks/COLAB_GUIDE.md` for full instructions.
+- Upload `margdrishti_colab.zip` and `notebooks/colab_training.ipynb` to Google Drive.
+- Run the notebook in Colab with a T4 GPU.
+- Download `margdrishti_results_custom.zip` when finished.
+
+### 5. Import Results and Generate Ablation Report
+- Import the downloaded results into your local workspace:
+  `python -m scripts.import_run --zip margdrishti_results_custom.zip`
+- Generate the ablation report:
+  `python -m scripts.ablation_report`

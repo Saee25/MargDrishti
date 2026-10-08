@@ -19,7 +19,5 @@ frontend/dist/
 Thumbs.db
 .vscode/
 .idea/
-experiments/*
-!experiments/.gitkeep
-reports/*
-!reports/.gitkeep
+tests/_tmp*/
+experiments/_smoke*/
