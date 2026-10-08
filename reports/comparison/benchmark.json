@@ -1,0 +1,47 @@
+[
+  {
+    "model": "MargNet",
+    "params": 1191463,
+    "trainable_params": 1191463,
+    "size_mb": 4.569287300109863,
+    "macs_m": 211.175168,
+    "fwd_bs1_median_ms": 4.649349999453989,
+    "fwd_bs1_p95_ms": 7.417254999927535,
+    "fwd_bs1_img_sec": 215.08382894758154,
+    "pipe_bs1_median_ms": 7.762999997794395,
+    "pipe_bs1_img_sec": 128.81617934872054,
+    "fwd_bs32_median_ms": 88.79865000017162,
+    "fwd_bs32_img_sec": 360.3658388943768,
+    "device": "cpu"
+  },
+  {
+    "model": "ResNet50 frozen",
+    "params": 23653511,
+    "trainable_params": 23653511,
+    "size_mb": 90.53660488128662,
+    "macs_m": 4087.281664,
+    "fwd_bs1_median_ms": 73.61290000153531,
+    "fwd_bs1_p95_ms": 91.22750499900576,
+    "fwd_bs1_img_sec": 13.584575529277389,
+    "pipe_bs1_median_ms": 81.19844999964698,
+    "pipe_bs1_img_sec": 12.315506022643875,
+    "fwd_bs32_median_ms": 2325.6296500003373,
+    "fwd_bs32_img_sec": 13.759714492802136,
+    "device": "cpu"
+  },
+  {
+    "model": "ResNet50 fine-tuned",
+    "params": 23653511,
+    "trainable_params": 23653511,
+    "size_mb": 90.53660488128662,
+    "macs_m": 4087.281664,
+    "fwd_bs1_median_ms": 72.32080000176211,
+    "fwd_bs1_p95_ms": 84.85305500071262,
+    "fwd_bs1_img_sec": 13.827280671337082,
+    "pipe_bs1_median_ms": 78.25765000052343,
+    "pipe_bs1_img_sec": 12.778303462898663,
+    "fwd_bs32_median_ms": 2367.5410999985615,
+    "fwd_bs32_img_sec": 13.51613283504115,
+    "device": "cpu"
+  }
+]

@@ -1,0 +1,54 @@
+@import 'tailwindcss';
+
+@theme {
+  --color-cream-50: #FFFDF3;
+  --color-cream-100: #FFF9DB;
+  --color-cream-200: #F4ECC6;
+  --color-lavender-100: #EEEDFB;
+  --color-lavender-200: #CDCBF0;
+  --color-lavender-300: #B3ACDF;
+  --color-purple-400: #9479B8;
+  --color-purple-500: #7C5FA6;
+  --color-purple-700: #4E3A73;
+  --color-ink-900: #2A2438;
+  --color-ink-600: #5B5470;
+  --color-ink-400: #8E88A0;
+  --color-sage: #6F9E86;
+  --color-rose: #C0707F;
+  --color-ochre: #C39A45;
+  
+  --font-display: 'Cormorant Garamond', serif;
+  --font-sans: 'DM Sans', sans-serif;
+  --font-mono: 'IBM Plex Mono', monospace;
+  --font-deva: 'Tiro Devanagari Hindi', serif;
+
+  --shadow-soft: 0 1px 2px rgba(78,58,115,0.06), 0 8px 24px rgba(78,58,115,0.06);
+  --shadow-lift: 0 4px 6px rgba(78,58,115,0.06), 0 12px 32px rgba(78,58,115,0.08);
+
+  --ease-soft: cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+@layer base {
+  body {
+    @apply bg-cream-50 text-ink-900 font-sans text-base antialiased selection:bg-lavender-200;
+    line-height: 1.65;
+  }
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-display tracking-tight text-ink-900;
+  }
+  h1 {
+    font-size: clamp(3rem, 5vw, 4rem); /* ~48px-64px */
+  }
+  h2 {
+    font-size: clamp(2rem, 3vw, 2.5rem); /* ~32px-40px */
+  }
+  :focus-visible {
+    @apply outline-purple-500 outline-2 outline-offset-2;
+  }
+  html {
+    scroll-behavior: smooth;
+  }
+  .tabular-nums {
+    font-variant-numeric: tabular-nums;
+  }
+}
